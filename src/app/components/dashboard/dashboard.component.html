@@ -1,0 +1,30 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side"  opened #sidebar>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <!-- Body -->
+  <mat-sidenav-content>
+    <div class="content">
+
+      <div class="toolbar d-flex justify-content-between p-2 ">
+
+        <div class="icon ">
+          <mat-icon class="mat-18" (click)="sidebar.toggle()">menu</mat-icon>
+          <i class="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i>
+        </div>
+        <div class="profile ">
+          <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </div>
+      </div>
+      <!-- content -->
+      <div class="main">
+        <router-outlet></router-outlet>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

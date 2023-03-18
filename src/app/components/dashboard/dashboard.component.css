@@ -1,0 +1,14 @@
+mat-sidenav{
+  width: 250px;
+height:100%;
+color:#fff;
+
+}
+mat-sidenav-container{
+  height: 100vh;
+  background-color: #eaedf7;
+}
+.toolbar{background-color: #fff;}
+.main{
+  margin-left:30px
+}
