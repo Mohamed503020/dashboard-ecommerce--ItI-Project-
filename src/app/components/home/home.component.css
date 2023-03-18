@@ -12,4 +12,13 @@
 }
 i{
   color:#ccc;
+
+}
+
+.chart {  
+  background-color: #fff;
+}
+.circle{background-color: #fff;}
+.charts-container{
+  overflow: hidden;
 }
