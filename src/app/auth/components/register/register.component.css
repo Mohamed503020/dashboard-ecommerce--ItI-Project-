@@ -1,6 +1,12 @@
 .body {
     margin-top: 10px;
     background-color: rgb(253, 253, 253);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: -10px;
   }
   .global-container {
     height: 100%;
