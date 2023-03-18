@@ -5,7 +5,8 @@ import { ProductRoutingModule } from './product-routing.module';
 import { AllProductsComponent } from './components/all-products/all-products.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { AddProductComponent } from './components/add-product/add-product.compon
   ],
   imports: [
     CommonModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule
   ]
 })
 export class ProductModule { }
