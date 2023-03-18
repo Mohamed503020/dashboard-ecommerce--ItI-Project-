@@ -3,6 +3,11 @@
     color: white;
     padding: 5px;
   }
+
+  .category-title{background-color: #fff;}
+.table{background-color: #fff;
+padding: 15px;
+}
   .fa-trash{
     background-color: red;
   }
@@ -18,7 +23,7 @@
     border-radius: 5px;
     margin-top: 5px;
   }
-  
+
   button {
    box-shadow: 2px 2px 6px #000000;;
   }
