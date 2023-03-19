@@ -5,6 +5,10 @@ import { UserRoutingModule } from './user-routing.module';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UsergridComponent } from './components/usergrid/usergrid.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -15,7 +19,13 @@ import { UsergridComponent } from './components/usergrid/usergrid.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    
+    
   ]
 })
 export class UserModule { }
