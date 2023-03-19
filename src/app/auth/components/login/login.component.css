@@ -14,7 +14,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 .card {
   border: 2px solid grey;
