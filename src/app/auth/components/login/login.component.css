@@ -1,0 +1,106 @@
+
+.body {
+  background-color: rgb(253, 253, 253);
+  overflow: hidden;
+  
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.global-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  border: 2px solid grey;
+  padding: 10px;
+  border-radius: 20%;
+}
+form {
+  padding-top: 10px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.card-text {
+  margin-top: -10px;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+.card-title {
+  font-weight: 300;
+}
+
+.btn {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.login-form {
+  width: 420px !important;
+  margin: 20px;
+}
+
+.sign-up {
+  text-align: center;
+  padding: 20px 0 0;
+}
+
+.alert {
+  margin-bottom: -30px;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.btn {
+  border-radius: 20px !important;
+}
+.card {
+  border-radius: 10px !important;
+}
+
+.card-span {
+  width: fit-content;
+}
+
+.card-all {
+  min-width: 400px;
+  border-radius: 20px !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.form-control {
+  border-radius: 15px !important;
+}
+
+input::placeholder {
+  color: #d9dbd9;
+  padding: 0 0 5px 5px;
+}
+.card-header {
+  font-weight: 550;
+  height: 100px;
+  width: 100%;
+  background-color: #88aaf2;
+}
+.form-control {
+  background-color: #fdfdfd;
+}
+
+.loginB {
+  margin-left: 110px;
+  height: 10%;
+  width: 40%;
+  background-color: #88aaf2;
+  font-size: 18px;
+}
+
+.sign-up {
+  font-size: large;
+  color: #848181;
+}
