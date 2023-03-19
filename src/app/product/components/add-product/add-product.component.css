@@ -57,6 +57,24 @@
   transform: translateY(-15px);
   font-size: 12px;
 }
+/* /////////////// */
+.inputbox textarea:valid:not(:focus) ~ span {
+    transform: translateY(-15px);
+    font-size: 15px;
+    color:  rgb(116, 155, 239);
+  }
+  .inputbox textarea:valid:focus ~ span {
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 15px;
+  }
+  .inputbox textarea:invalid:focus ~ span {
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 15px;
+  }
+  .inputbox textarea:invalid:not(:focus) ~ span {
+    transform: translateY(-15px);
+    font-size: 12px;
+  }
 /* .card-blue {
   background-color: rgb(136, 170, 243);
 }
@@ -73,7 +91,7 @@
 }
 
 .btn {
-  background-color: rgb(136, 170, 243);
+  background-color:rgb(136, 170, 243);
   color: #fff;
 }
 
@@ -87,3 +105,26 @@
 .form-control {
   background-color: white;
 }
+.image-upload > input
+{
+    display: none;
+}
+
+.fa-upload
+{
+    font-size: 30px;
+    cursor: pointer;
+    color:rgb(136, 170, 243);
+    margin: 5px;
+}
+.icons{
+  font-size: 20px;
+  cursor: pointer;
+  color:rgb(136, 170, 243);
+  margin: 5px;
+}
+/* .fa-cloud{
+  font-size: 100px;
+  cursor: pointer;
+  color: rgb(13, 0, 255);
+} */
