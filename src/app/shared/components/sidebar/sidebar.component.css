@@ -1,10 +1,10 @@
  /* Toggle Styles */
-.main{background-color: #F7941D;color:#fff;}
+.main{background-color:rgb(136, 170, 243);color:#fff;}
 
  .info{
   width: 100%;
   padding: 10px;
-  background-color: #000;
+  background-color: rgb(26, 40, 62);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,7 +21,7 @@
  .info hr{
   width: 200px;
   height: 3px;
-  background-color: #eeac5c;
+  background-color: rgb(136, 170, 243);
   outline: none;
   border:none;
  }
@@ -49,7 +49,7 @@
 #sidebar-wrapper {
 overflow: hidden;
   height: 100%;
-  background: #000;
+  background: rgb(26, 40, 62);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -105,7 +105,7 @@ overflow: hidden;
   text-decoration: none;
   color: #fff;
   background: rgba(255, 255, 255, 0.2);
-  border-left: #F7941D 2px solid;
+  border-left:rgb(136, 170, 243) 2px solid;
 }
 
 .sidebar-nav li a:active,

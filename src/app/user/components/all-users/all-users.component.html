@@ -1,1 +1,55 @@
-<p>all-users works!</p>
+<div class="container profile-page">
+  <h1 class="mt-3">All User</h1>
+  <div class="row d-flex justify-content-between">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+      <button class="btn" type="submit">
+        Add User
+      </button>
+    </div>
+    <form class="d-flex col-lg-3 mb-3 mt-2">
+      <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" matInput
+        (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </form>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="img">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Profile</mat-header-cell>
+        <mat-cell *matCellDef="let element"><img [src]="element.img" alt=""></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalBuy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Total Buy</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.totalBuy}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="joinOn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>JoinOn</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.joinOn}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
