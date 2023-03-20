@@ -6,19 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent {
-  images: File[] = [];
-
-  onFileSelected(event: any, inputNumber: number) {
+  imageUrl!: string;
+  onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    this.images[inputNumber - 1] = file;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      const previewElement = document.getElementById(`image-preview-${inputNumber}`);
-      if (previewElement) {
-        previewElement.setAttribute('src', reader.result as string);
-      }
+      this.imageUrl = reader.result as string;
     };
   }
-  
+
+
+
 }

@@ -16,13 +16,17 @@
                                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                                         <div class="col-md-5 col-lg-5 col-sm-12">
                                             <div class="position-relative">
-                                                <img id="image-preview-1" src="" alt="Preview">
+                                              <div *ngIf="imageUrl">
+                                                <img [src]="imageUrl" alt="Uploaded image">
+                                              </div>
+
                                                 <div class="image-upload">
                                                     <label for="file-input">
                                                         <i
                                                             class="fa-solid fa-upload position-absolute top-0 start-0"></i>
                                                     </label>
-                                                    <input type="file" (change)="onFileSelected($event, 1)">
+                                                    <input type="file" (change)="onFileSelected($event)">
+
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
@@ -190,23 +194,6 @@
 
                                     </div>
 
-                                    <div class="pt-2">
-                                        <a href="#!" class="text-body"><button class="btn" type="submit">Submit
-                                            </button></a>
-                                    </div>
-
-
-                                 
-                                  
-                                    <input type="file" (change)="onFileSelected($event, 2)">
-                                    <img id="image-preview-2" src="" alt="Preview">
-                                    <input type="file" (change)="onFileSelected($event, 3)">
-                                    <img id="image-preview-3" src="" alt="Preview">
-                                    <input type="file" (change)="onFileSelected($event, 4)">
-                                    <img id="image-preview-4" src="" alt="Preview">
-
-
-                                    
                                 </div>
                             </div>
                         </div>
