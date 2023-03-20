@@ -19,6 +19,7 @@
       <div class="col-md-4 mb-3 ">
         <label for="searchType">Search By:</label>
         <select class="form-control" id="searchType" [(ngModel)]="searchType">
+          <option selected disabled>Search by</option>
           <option value="name">name</option>
           <option value="price bigger than">price biggrer than</option>
           <option value="price less than">price less than</option>
@@ -29,7 +30,7 @@
       </div>
       <div class="col-md-4 mb-3">
         <label for="searchTerm">Search Term:</label>
-        <input type="text" class="form-control" id="searchTerm"(keyup)="search()"  [(ngModel)]="searchTerm">
+        <input placeholder="Search Term" type="text" class="form-control" id="searchTerm"(keyup)="search()"  [(ngModel)]="searchTerm">
       </div>
       <div class="col-md-4 mb-3 d-flex align-items-end">
         <!-- <button class="btn btn-primary" (click)="search()">Search</button> -->
