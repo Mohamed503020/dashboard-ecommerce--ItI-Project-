@@ -1,25 +1,22 @@
-table {
-  width: 100%;
+.table {
+  margin-top: 20px;
 }
 
-.mat-mdc-form-field {
-  font-size: 14px;
-  width: 100%;
+th:hover {
+  cursor: pointer;
 }
 
-td,
-th {
-  width: 25%;
+.pagination {
+  margin-top: 20px;
+  text-align: center;
 }
 
-img {
-  border-radius: 50%;
-  width: 50px;
-  margin: 3px;
-  /* border: 3px solid #fff; */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+.filter {
+  margin-top: 20px;
+  text-align: center;
 }
-button {
-  background-color: rgb(136, 170, 243);
-  color: #fff;
-}
+
+
+
+
+

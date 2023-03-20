@@ -30,7 +30,8 @@ a {
 
 .profile-page .profile-header .profile-image img {
   border-radius: 50%;
-  width: 110px;
+  width:90px;
+  margin-top:20px;
   border: 3px solid rgb(136, 170, 243);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 }

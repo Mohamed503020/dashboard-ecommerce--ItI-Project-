@@ -1,1 +1,23 @@
-<p>add-category works!</p>
+<!-- <p>add-category works!</p> -->
+<button mat-icon-button style="float :right; margin: 5px;"matDialogClose>
+    <mat-icon>close</mat-icon>
+</button>
+<mat-dialog-content>
+    <header>
+        <h1>New Category</h1>
+    </header>
+</mat-dialog-content>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" >
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+            <button class="btn btn-danger" type="button" matDialogClose>Cancle</button>
+            <button class="btn save me-md-2" type="button">Save</button>
+          </div>
+      </form>
+</div>
