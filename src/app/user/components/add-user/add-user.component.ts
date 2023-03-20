@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent {
+firstName?:string;
+Fullname?: string;
+lastName?:string;
+userName?:string;
+Email?:string;
+birth?:number;
+address?:string;
 
 }

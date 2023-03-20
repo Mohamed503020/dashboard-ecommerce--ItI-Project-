@@ -16,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   declarations:[
     AllUsersComponent,
     AddUserComponent,
-    UsergridComponent
+    UsergridComponent,
+    
   ],
   imports: [
     CommonModule,
