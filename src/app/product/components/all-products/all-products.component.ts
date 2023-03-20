@@ -14,7 +14,7 @@ interface Item {
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.css']
 })
-export class AllProductsComponent {
+export class AllProductsComponent implements OnInit {
   items: Item[] = [
     {
       image: new URL('https://fakeimg.pl/300/'),
@@ -27,7 +27,28 @@ export class AllProductsComponent {
       image: new URL('https://fakeimg.pl/300/'),
       name: 'Item 2',
       price: 24.99,
-      offer: 0, // no discount
+      offer: 0, 
+      date: '2023-03-19',
+    },
+    {
+      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
+      name: 'Item 3',
+      price: 5.49,
+      offer: 0.1, 
+      date: '2021-04-05',
+    },
+    {
+      image: new URL('https://fakeimg.pl/300/'),
+      name: 'Item 1',
+      price: 10.99,
+      offer: 0.2, 
+      date: '2023-02-18',
+    },
+    {
+      image: new URL('https://fakeimg.pl/300/'),
+      name: 'Item 2',
+      price: 24.99,
+      offer: 0, 
       date: '2023-03-19',
     },
     {
@@ -48,7 +69,7 @@ export class AllProductsComponent {
       image: new URL('https://fakeimg.pl/300/'),
       name: 'Item 2',
       price: 24.99,
-      offer: 0, // no discount
+      offer: 0,
       date: '2023-03-19',
     },
     {
@@ -69,28 +90,7 @@ export class AllProductsComponent {
       image: new URL('https://fakeimg.pl/300/'),
       name: 'Item 2',
       price: 24.99,
-      offer: 0, // no discount
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2023-03-17',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, // no discount
+      offer: 0, 
       date: '2023-03-19',
     },
     {
