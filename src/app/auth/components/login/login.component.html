@@ -1,6 +1,6 @@
-<div class="body d-flex justify-content-center  overflow-hidden">
+<div class="body d-flex justify-content-center  overflow-hidden pb-3">
   <div class="global-container">
-    <div class="card-all login-form w-25 shadow mb-5 bg-white d-flex">
+    <div class="card-all login-form  shadow pb-3 mb-5 bg-white d-flex">
       <div
         class="card-header d-flex align-items-center
          justify-content-center text-center text-light"
@@ -10,7 +10,7 @@
       </div>
       <div class="card-body">
         <h3
-          class="card-title text-center mt-5"
+          class="card-title text-center mt-2"
           style="font-weight: 550; color: #848181; font-size: 25px"
         >
           Sign in
@@ -60,7 +60,7 @@
                   This is not a valid Password !
                 </p>
               </div>
-              <a href="#" style="float: right; font-size: 18px" class="p-4"
+              <a href="#" style="float: right; font-size: 14px" class="pt-3"
                 >Forgot password?</a
               >
               <br />
@@ -68,27 +68,24 @@
                 type="checkbox"
                 value="lsRememberMe"
                 id="rememberMe"
-                class="p-5"
+                class="pt-3"
               />
-              <label for="rememberMe" style="font-size: 18px"
-                >Remember me</label
+
+              <label for="rememberMe" style="font-size: 14px;margin-left: 5px;"
+                > Remember me</label
               >
             </div>
-            <button
+            <div class="text-center">            <button
               type="submit"
-              class="btn loginB text-light mt-1 btn-lg"
+              class="btn loginB text-light mt-1 btn-lg text-center"
               routerLink="/dashboard"
             >
               Sign in
-            </button>
+            </button></div>
 
-            <div class="sign-up">
-              Don't have an account? <a routerLink="/auth/register" href="">Sign up</a>
-            </div>
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-la
