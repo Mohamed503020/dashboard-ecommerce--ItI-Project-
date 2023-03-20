@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  showFiller=false
+  showFiller=false;
+  //orders =[{prooduc:"prodc",id:1,tottalprice:250,items:4},{prooduc:"prodc",id:1,tottalprice:250,items:4}]
 }

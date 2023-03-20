@@ -1,14 +1,20 @@
-mat-sidenav{
+mat-sidenav {
   width: 250px;
-height:100%;
-color:#fff;
-
+  height: 100%;
+  color: #fff;
 }
-mat-sidenav-container{
+mat-sidenav-container {
   height: 100vh;
   background-color: #eaedf7;
 }
-.toolbar{background-color: #fff;}
-.main{
-  margin-left:30px
+.toolbar {
+  background-color: #fff;
+}
+.main {
+  margin-left: 10px;
+}
+button {
+  background-color: rgb(136, 170, 243);
+  color: #fff;
+  border: rgb(136, 170, 243);
 }
