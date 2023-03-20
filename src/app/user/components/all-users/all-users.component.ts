@@ -115,7 +115,7 @@ export class AllUsersComponent implements OnInit {
     },
   ]
 
-  pageSize = 6;
+  pageSize = 5;
   startIndex = 0;
   endIndex = this.pageSize;
   currentPage = 1;
