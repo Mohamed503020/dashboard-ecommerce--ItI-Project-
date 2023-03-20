@@ -7,6 +7,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {MatTableModule} from '@angular/material/table';
     ProductRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class ProductModule { }
