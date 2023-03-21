@@ -9,12 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { GridProductsComponent } from './components/grid-products/grid-products.component';
 
 @NgModule({
   declarations: [
     AllProductsComponent,
     ProductDetailsComponent,
-    AddProductComponent
+    AddProductComponent,
+    GridProductsComponent
   ],
   imports: [
     CommonModule,
