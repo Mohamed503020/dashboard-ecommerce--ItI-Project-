@@ -10,6 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { GridProductsComponent } from './components/grid-products/grid-products.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GridProductsComponent } from './components/grid-products/grid-products.
     ReactiveFormsModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule
   ]
 })
 export class ProductModule { }

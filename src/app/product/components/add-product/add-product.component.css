@@ -100,21 +100,40 @@
     display: none;
 }
 
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
 .fa-upload
 {
-    font-size: 30px;
+    font-size: 20px;
     cursor: pointer;
-    color:rgb(136, 170, 243);
-    margin: 5px;
+    color:rgb(240, 242, 245);
 }
 .icons{
   font-size: 20px;
   cursor: pointer;
-  color:rgb(136, 170, 243);
+  color:rgb(226, 228, 234);
   margin: 5px;
 }
 /* .fa-cloud{
   font-size: 100px;
   cursor: pointer;
   color: rgb(13, 0, 255);
+} */
+
+
+/* label {
+  display: inline-block;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+  background-color: #483d8b;
 } */
