@@ -7,19 +7,25 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { GridProductsComponent } from './components/grid-products/grid-products.component';
 
 @NgModule({
   declarations: [
     AllProductsComponent,
     ProductDetailsComponent,
-    AddProductComponent
+    AddProductComponent,
+    GridProductsComponent
   ],
   imports: [
     CommonModule,
     ProductRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class ProductModule { }

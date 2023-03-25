@@ -13,10 +13,11 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
+  declarations:[
     AllUsersComponent,
     AddUserComponent,
-    UsergridComponent
+    UsergridComponent,
+    
   ],
   imports: [
     CommonModule,

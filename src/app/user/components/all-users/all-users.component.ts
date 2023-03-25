@@ -6,7 +6,7 @@ interface user {
   email: string;
   phone: string;
   joinOn: string;
- 
+
 }
 @Component({
   selector: 'app-all-users',
@@ -114,8 +114,8 @@ export class AllUsersComponent implements OnInit {
       joinOn: "2023-01-01"
     },
   ]
-  
-  pageSize = 6;
+
+  pageSize = 5;
   startIndex = 0;
   endIndex = this.pageSize;
   currentPage = 1;
@@ -131,7 +131,7 @@ export class AllUsersComponent implements OnInit {
   calculatePageNumbers() {
     const totalPages = Math.ceil(this.filteredItems.length / this.pageSize);
     this.pageNumbers = Array(totalPages).fill(0).map((_, i) => i + 1);
-    
+
   }
 
   goToPage(pageNumber: number) {
@@ -155,7 +155,7 @@ export class AllUsersComponent implements OnInit {
   search() {
     this.filteredItems = this.users.filter(item => {
       const searchTermLower = this.searchTerm.toLowerCase();
-      
+
         if (this.searchType=='name'){
           return item.name.toLowerCase().includes(searchTermLower)
         }

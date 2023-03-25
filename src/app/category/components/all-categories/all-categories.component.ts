@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { AddCategoryComponent } from '../add-category/add-category.component'; 
 
 interface Item {
   name: string;
@@ -86,4 +88,16 @@ export class AllCategoriesComponent implements OnInit {
     this.calculatePageNumbers();
     this.goToPage(1);
   } 
+
+  constructor(public dialog: MatDialog) {}
+  openDialog() {
+    const dialogRef = this.dialog.open(AddCategoryComponent, {
+      width:'350px', height:'260px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+

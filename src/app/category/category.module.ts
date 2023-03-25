@@ -7,6 +7,11 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AllCategoriesComponent,
@@ -16,7 +21,12 @@ import { MatTableModule } from '@angular/material/table';
     CommonModule,
     CategoryRoutingModule,
     FormsModule, ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule
   ]
 })
 export class CategoryModule { }

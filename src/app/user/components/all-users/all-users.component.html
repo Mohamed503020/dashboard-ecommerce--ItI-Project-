@@ -62,8 +62,8 @@
 
     <div class="pagination d-flex justify-content-center">
       <button class="btn btn-light" (click)="prev()" [disabled]="startIndex == 0">&lt; &lt; Previous</button>
-      <button *ngFor="let pageNumber of pageNumbers" 
-              class="btn btn-light" 
+      <button *ngFor="let pageNumber of pageNumbers"
+              class="btn btn-light"
               [class.active]="currentPage === pageNumber"
               (click)="goToPage(pageNumber)">
         {{ pageNumber }}
