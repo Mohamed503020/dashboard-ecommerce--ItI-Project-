@@ -1,20 +1,33 @@
 <section class="h-100 h-custom">
-    <div class="container py-2 px-3 h-100">
-        <div class="d-flex justify-content-between align-items-center py-3">
-            <h1>Add Product</h1>
-            <button class="btn" type="submit">View All Product </button>
-        </div>
+  <div class="container py-2 px-3 h-100">
+    <div class="d-flex justify-content-between align-items-center py-3">
+      <h1>Add Product</h1>
+      <button class="btn" type="submit">View All Product</button>
     </div>
-    <div class="container py-2 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12">
-                <div class="card card-registration card-registration-2" style="border-radius: 15px;">
-                    <div class="card-body p-0">
-                        <div class="row g-0">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                        <div class="col-md-5 col-lg-5 col-sm-12">
+  </div>
+  <div class="container py-2 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div
+          class="card card-registration card-registration-2"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <form [formGroup]="productForm" (ngSubmit)="onSubmit()" >
+              <div class="col-lg-12">
+                <div class="p-5">
+                  <div
+                    class="row mb-4 d-flex justify-content-between align-items-center"
+                  >
+                    <div class="col-md-6 col-lg-5 row">
+                      <div class="col-12 mb-3">
+                        <label>Imagees Product :</label>
+                        <input type="file" id="images" (change)="onImageUpload($event)" multiple>
+                      </div>
+
+                    </div>
+                    <!-- <div class="col-md-5 col-lg-5 col-sm-12">
                                             <div class="position-relative">
                                               <div *ngIf="imageUrl">
                                                 <img [src]="imageUrl" alt="Uploaded image">
@@ -87,119 +100,126 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="col-md-7">
-                                            <form #Form="ngForm">
-                                                <div class="row mt-3">
-                                                    <!-- /////////////////Product Name////////////////////// -->
-                                                    <div class="col-md-6">
-                                                        <div class="inputbox mt-3 mr-2">
-                                                            <input #productName="ngModel" ngModel name="productName"
-                                                                type="text" class="form-control " required="required"
-                                                                pattern="^[a-zA-Z]{4,15}$">
-                                                            <span>Product Name</span>
-                                                            <div [hidden]="productName.valid || productName.pristine"
-                                                                class=" text-danger" role="alert">
-                                                                <p [hidden]="!productName.errors?.['required']">Product
-                                                                    Name Required <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                                <p [hidden]="!productName.errors?.['pattern']">Invalid
-                                                                    Product Name <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /////////////////Select Category////////////////////// -->
-                                                    <div class="col-md-6">
-                                                        <div class="inputbox mt-3 mr-2">
-                                                            <select class="form-select"
-                                                                aria-label="Default select example">
-                                                                <option selected>Category</option>
-                                                                <option value="1">T-shirt</option>
-                                                                <option value="2">Electronics</option>
-                                                                <option value="3">Shoes</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /////////////////Product Price////////////////////// -->
-                                                    <div class="col-md-6">
-                                                        <div class="inputbox mt-3 mr-2">
-                                                            <input #productPrice="ngModel" ngModel name="productPrice"
-                                                                type="text" class="form-control" required="required"
-                                                                pattern="^[0-9]{1,6}$">
-                                                            <span>Product Price</span>
-                                                            <div [hidden]="productPrice.valid || productPrice.pristine"
-                                                                class=" text-danger" role="alert">
-                                                                <p [hidden]="!productPrice.errors?.['required']">
-                                                                    Product Quantity Required <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                                <p [hidden]="!productPrice.errors?.['pattern']">
-                                                                    Invalid
-                                                                    Product Quantity <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /////////////////Product Quantity////////////////////// -->
-                                                    <div class="col-md-6">
-                                                        <div class="inputbox mt-3 mr-2">
-                                                            <input #productQuantity="ngModel" ngModel
-                                                                name="productQuantity" type="text" class="form-control"
-                                                                required="required" pattern="^[0-9]{1,6}$">
-                                                            <span>Product Quantity</span>
-                                                            <div [hidden]="productQuantity.valid || productQuantity.pristine"
-                                                                class=" text-danger" role="alert">
-                                                                <p [hidden]="!productQuantity.errors?.['required']">
-                                                                    Product Quantity Required <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                                <p [hidden]="!productQuantity.errors?.['pattern']">
-                                                                    Invalid
-                                                                    Product Quantity <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /////////////////DESCRIPTION////////////////////// -->
-                                                    <div class="col-md-12">
-                                                        <div class="inputbox mt-3 mr-2">
-                                                            <textarea #productDescription="ngModel" ngModel
-                                                                name="productDescription" type="text"
-                                                                class="form-control " required="required"
-                                                                pattern="^[a-zA-Z]{10,100}$" rows="4"></textarea>
-                                                            <span>Product Description</span>
-                                                            <div [hidden]="productDescription.valid || productDescription.pristine"
-                                                                class=" text-danger" role="alert">
-                                                                <p [hidden]="!productDescription.errors?.['required']">
-                                                                    Product Description Required <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                                <p [hidden]="!productDescription.errors?.['pattern']">
-                                                                    Short Product Description <i
-                                                                        class="fa-solid error fa-circle-exclamation"></i>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                    <div class="col-md-7">
 
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-
-                                </div>
+                        <div class="row mt-3">
+                          <!-- /////////////////Product Name////////////////////// -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <input
+                                type="text" formControlName="name"
+                                class="form-control"
+                                required="required"
+                                pattern="^[a-zA-Z]{4,15}$"
+                              />
+                              <span>Product Name</span>
                             </div>
+                          </div>
+                          <!-- /////////////////Select Category////////////////////// -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <select formControlName="category"
+                                class="form-select"
+                                aria-label="Default select example"
+                              >
+                                <option selected>Category</option>
+                                <option value="11">T-shirt</option>
+                                <option value="2">Electronics</option>
+                                <option value="1">laptops</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- ///status // -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <select formControlName="status"
+                                class="form-select"
+                                aria-label="Default select example"
+                              >
+                                <option selected>Stauts</option>
+                                <option value="available">T-available</option>
+                                <option value="inavailable">inavailable</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- /////////////////Product Price////////////////////// -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <input formControlName="price"
+                                type="number"
+                                class="form-control"
+                                required="required"
+                                pattern="^[0-9]{1,6}$"
+                              />
+                              <span>Product Price</span>
+                            </div>
+                          </div>
+                          <!-- /////////////////Product Quantity////////////////////// -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <input  formControlName="quantity"
+                                type="number"
+                                class="form-control"
+                                required="required"
+                                pattern="^[0-9]{1,6}$"
+                              />
+                              <span>Product Quantity</span>
+                            </div>
+                          </div>
+                          <!-- /////////discount  -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <input
+                                type="number" formControlName="discount"
+                                class="form-control"
+                                required="required"
+                                pattern="^[0-9]{1,6}$"
+                              />
+                              <span>Product Discount</span>
+                            </div>
+                          </div>
+<!-- ///////////////////rate// -->
+                          <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2">
+                              <input  formControlName="rate"
+                                type="number"
+                                class="form-control"
+                                required="required"
+                                pattern="^[0-9]{1,6}$"
+                              />
+                              <span>Product Rate</span>
+                            </div>
+                          </div>
+                          <!-- /////////////////DESCRIPTION////////////////////// -->
+                          <div class="col-md-12">
+                            <div class="inputbox mt-3 mr-2">
+                              <textarea
+                                type="text"
+                                class="form-control"
+                                required="required"
+                                pattern="^[a-zA-Z]{10,100}$"
+                                rows="4"
+                              ></textarea>
+                              <span>Product Description</span>
+                            </div>
+                          </div>
                         </div>
+                        <div class="div float">
+                          <button class="btn btn-primary" type="submit">  Add product</button>
+                        </div>
+
                     </div>
+                  </div>
+
                 </div>
+              </div>
+            </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
