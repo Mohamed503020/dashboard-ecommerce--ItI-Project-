@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 main="main"
+admin=JSON.parse(localStorage.getItem('admin')!)
 }

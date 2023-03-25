@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MatTableModule } from '@angular/material/table';
     CommonModule,
     AuthRoutingModule,
     FormsModule, ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ]
 })
 export class AuthModule { }
