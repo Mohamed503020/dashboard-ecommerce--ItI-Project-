@@ -1,10 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CategoryService } from '../../services/category.service';
 import { AddCategoryComponent } from '../add-category/add-category.component'; 
+import { UpdateCategoryComponent } from '../update-category/update-category.component';
 
-interface Item {
-  name: string;
-  parentCategory: string;
+interface Category {
+  id:BigInteger;
+  name:string;
   // img:string;
 }
 
@@ -14,39 +18,36 @@ interface Item {
   styleUrls: ['./all-categories.component.css']
 })
 export class AllCategoriesComponent implements OnInit {
-  items: Item[] = [
-    { name: 'Item 1', parentCategory: 'hhlsdf 1'  },
-    { name: 'Item 2', parentCategory: 'sdkjaslk 1'  },
-    { name: 'Item 3', parentCategory: 'g 2'  },
-    { name: 'Item 4', parentCategory: 'f 2'  },
-    { name: 'Item 5', parentCategory: 'a 3'  },
-    { name: 'Item 6', parentCategory: 'hh 3'  },
-    { name: 'Item 7', parentCategory: 'Category 4'  },
-    { name: 'Item 8', parentCategory: 'Category 4'  },
-    { name: 'Item 9', parentCategory: 'Category 5'  },
-    { name: 'Item 10', parentCategory: 'Category 5'  },
-    { name: 'Item 11', parentCategory: 'Category 6'  },
-    { name: 'Item 12', parentCategory: 'Category 6'  },
-    { name: 'Item 13', parentCategory: 'Category 7'  },
-    { name: 'Item 14', parentCategory: 'Category 7'  },
-    { name: 'Item 15', parentCategory: 'Category 8'  },
-    { name: 'Item 16', parentCategory: 'Category 8'  },
-    { name: 'Item 17', parentCategory: 'Category 9'  },
-    { name: 'Item 18', parentCategory: 'Category 9'  },
-    { name: 'Item 19', parentCategory: 'Category 10'  },
-  ];
+
+
+  constructor(public dialog: MatDialog,private categoryServ:CategoryService,private router: Router,private http:HttpClient) {}
+
+  // categories:Category[]=[];
+  category:Category={} as Category;
+  items:Category[]= [];
 
   pageSize = 6;
   startIndex = 0;
   endIndex = this.pageSize;
   currentPage = 1;
   pageNumbers: number[] = [];
-  searchType = 'item';
+  searchType = 'name';
   searchTerm = '';
-  filteredItems: Item[] = this.items;
+  filteredItems: Category[] = this.items;
 
   ngOnInit() {
     this.calculatePageNumbers();
+
+    this.getAllCategories();
+  }
+
+  getAllCategories(){
+    this.categoryServ.getCategories().subscribe({
+      next:(res)=>{
+        this.items=res;
+        // console.log(this.items);
+      }
+     })
   }
 
   calculatePageNumbers() {
@@ -80,24 +81,58 @@ export class AllCategoriesComponent implements OnInit {
         // if (this.searchType=='img'){
         //   return item.img.toLowerCase().includes(searchTermLower)
         // }
-        return this.searchType === 'item' ?
-        item.name.toLowerCase().includes(searchTermLower) :
-        item.parentCategory.toLowerCase().includes(searchTermLower);
+        return this.searchType === 'name' ?
+        item.name.toLowerCase().includes(searchTermLower):'';
     });
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
   } 
 
-  constructor(public dialog: MatDialog) {}
+ 
   openDialog() {
     const dialogRef = this.dialog.open(AddCategoryComponent, {
       width:'350px', height:'260px'
     });
+  
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.getAllCategories();
     });
   }
+
+  openUpdateDialog(id:any) {
+
+    this.http.get(`http://localhost:8000/api/categories/${id}`).subscribe((data: any) => {
+      // Pass the fetched data to the UpdateCategoryComponent dialog.
+      const dialogRef = this.dialog.open(UpdateCategoryComponent, {
+        width: '350px',
+        height: '260px',
+        data: data
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // Handle the returned data here.
+          console.log(`Returned data: ${JSON.stringify(result)}`);
+          this.getAllCategories();
+        }
+      });
+    });
+ }
+
+ deleteCat(id:any){
+  
+  this.categoryServ.deleteCategory(id).subscribe(
+    (cat)=>{
+      console.log("record deleted successfuly",cat);
+      this.getAllCategories();
+      
+    }
+  )
+console.log(id);
+
 }
 
+}

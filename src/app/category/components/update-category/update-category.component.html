@@ -4,20 +4,21 @@
 </button>
 <mat-dialog-content>
     <header>
-        <h1>New Category</h1>
+        <h1>Update Category</h1>
     </header>
 </mat-dialog-content>
 
 <div class="container">
-    <form  #myForm="ngForm"  (ngSubmit)="saveCategory()">
+    <form  #myForm="ngForm"  (ngSubmit)="updateCategory()">
         <div class="mb-3">
             <label class="form-label">Category Name</label>
-            <input type="text"  [(ngModel)]="category.name" name="name" ngModel required  class="form-control" id="categoryName" >
+            <input type="text"  [(ngModel)]="category.name"  name="name" ngModel required  class="form-control" id="categoryName" >
           </div>
 
           <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
             <button class="btn btn-danger" type="button" matDialogClose>Cancle</button>
-            <button class="btn save me-md-2" type="submit">Save</button>
+            <button class="btn save me-md-2" type="submit">update</button>
           </div>
       </form>
 </div>
+

@@ -20,15 +20,15 @@
         <label for="searchType">Search By:</label>
         <select class="form-control" id="searchType" [(ngModel)]="searchType">
           <option selected disabled>Search by</option>
-          <option value="item">Item</option>
-          <option value="parentCategory">Parent Category</option>
+          <!-- <option value="id">id</option> -->
+          <option value="name">name</option>
           <!-- <option value="img">img</option> -->
 
         </select>
       </div>
       <div class="col-md-4 mb-3">
         <label for="searchTerm">Search Term:</label>
-        <input placeholder="Search Term" type="text" class="form-control" id="searchTerm"(keyup)="search()"  [(ngModel)]="searchTerm">
+        <input placeholder="Search Term" type="text" class="form-control" id="searchTerm"(keyup)="search()"  [(ngModel)]="searchType">
       </div>
       <div class="col-md-4 mb-3 d-flex align-items-end">
         <!-- <button class="btn btn-primary" (click)="search()">Search</button> -->
@@ -38,20 +38,20 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Parent Category</th>
+          <th>id</th>
+          <th>name</th>
           <!-- <th>img</th> -->
           <th>Edit</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of filteredItems.slice(startIndex, endIndex)">
+        <tr *ngFor="let item of items">
+          <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td>{{ item.parentCategory }}</td>
-          <!-- <td>{{item.img}}</td> -->
-          <td><i class="fas fa-pen bg-info p-2"></i></td>
-          <td><i class="fas fa-trash bg-danger p-2"></i></td>
+          
+          <td><i (click)="openUpdateDialog(item.id)" [routerLink]="['dashboard/category/',item.id]" class="Add" class="fas fa-pen bg-info p-2"></i></td>
+          <td><a (click)="deleteCat(item.id)"><i class="fas fa-trash bg-danger p-2"></i></a></td>
         </tr>
       </tbody>
     </table>
