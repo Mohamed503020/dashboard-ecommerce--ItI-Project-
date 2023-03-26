@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   showFiller=false;
+  admin=JSON.parse(localStorage.getItem('admin')!)
   //orders =[{prooduc:"prodc",id:1,tottalprice:250,items:4},{prooduc:"prodc",id:1,tottalprice:250,items:4}]
 }

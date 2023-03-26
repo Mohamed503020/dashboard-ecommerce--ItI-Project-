@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { GridProductsComponent } from './components/grid-products/grid-products.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+// import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
   declarations: [

@@ -15,27 +15,33 @@
         >
           Sign in
         </h3>
+        <h3 *ngIf="errorAuthLogin"
+        class="card-title text-center text-danger mt-2"
+        style="font-weight: 550; color: #848181; font-size: 25px"
+      >
+        {{errorAuthLogin}}
+      </h3>
         <div class="card-text">
-          <form #loginForm="ngForm" (ngSubmit)="(loginForm.value)">
+          <form #loginForm="ngForm" (ngSubmit)="(Userlogin())">
             <div class="form-group p-3">
               <input
-                type="text"
+                type="email"
                 required
                 name="username"
                 ngModel
                 #user="ngModel"
-                [(ngModel)]="Name"
-                pattern="^[a-zA-Z]{3,}( {1,2}[a-zA-Z]{3,}){0,}$"
+                [(ngModel)]="email"
+
                 placeholder="Username"
                 class="form-control form-control"
               />
               <div *ngIf="user.touched">
                 <p *ngIf="user.errors?.['required']" style="color: red">
-                  Username is a required field!
+                  Email is a required field!
                 </p>
-                <p *ngIf="user.errors?.['pattern']" style="color: red">
-                  Enter a name with at least three letters !
-                </p>
+                <!-- <p *ngIf="user.errors?.['pattern']" style="color: red">
+                  Enter valid email
+                </p> -->
               </div>
             </div>
             <div class="form-group p-3">

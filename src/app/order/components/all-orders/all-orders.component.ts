@@ -120,6 +120,7 @@ export class AllOrdersComponent {
 
   ngOnInit() {
     this.calculatePageNumbers();
+    console.log(this.filteredItems)
   }
 
   calculatePageNumbers() {

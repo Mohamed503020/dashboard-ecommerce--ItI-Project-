@@ -6,7 +6,7 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
 
 const routes: Routes = [
   {path:"",component:AllUsersComponent},
-  {path:"add",component:AddUserComponent},
+  {path:"add/:id",component:AddUserComponent},
   {path:"grid",component:UsergridComponent},
   {path:":id",component:AddUserComponent}
 ];

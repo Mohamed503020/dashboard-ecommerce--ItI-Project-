@@ -1,13 +1,7 @@
 import { Component,OnInit } from '@angular/core';
+import { ProductService } from '../../services/product.service';
 
-interface Item {
-  image: URL;
-  name: string;
-  price: number;
-  offer: number;
-  date: string;
- 
-}
+
 
 @Component({
   selector: 'app-all-products',
@@ -15,93 +9,8 @@ interface Item {
   styleUrls: ['./all-products.component.css']
 })
 export class AllProductsComponent implements OnInit {
-  items: Item[] = [
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, 
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2021-04-05',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-02-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, 
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2023-03-17',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0,
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2023-03-17',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, 
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2022-03-17',
-    },
-  ];
-
+  apiProduct: any[] = [];
+constructor(private productService:ProductService){}
   pageSize = 6;
   startIndex = 0;
   endIndex = this.pageSize;
@@ -109,10 +18,11 @@ export class AllProductsComponent implements OnInit {
   pageNumbers: number[] = [];
   searchType = 'item';
   searchTerm = '';
-  filteredItems: Item[] = this.items;
+  filteredItems: any[] = this.apiProduct;
 
   ngOnInit() {
     this.calculatePageNumbers();
+    this.getAllProduct();
   }
 
   calculatePageNumbers() {
@@ -140,7 +50,7 @@ export class AllProductsComponent implements OnInit {
   }
 
   search() {
-    this.filteredItems = this.items.filter(item => {
+    this.filteredItems = this.apiProduct.filter(item => {
       const searchTermLower = this.searchTerm.toLowerCase();
       
         if (this.searchType=='name'){
@@ -152,17 +62,24 @@ export class AllProductsComponent implements OnInit {
         if(this.searchType=='price bigger than'){
           return item.price>= +this.searchTerm;
         }
-        if(this.searchType=='offer'){
-          return item.offer*100 == +this.searchTerm;
-        }
-        return this.searchType === 'date'?
-        item.date.includes(searchTermLower):
-         item.date== this.searchTerm;
+        return this.searchType === 'discount'?
+        item.discount.includes(searchTermLower):
+         item.rate== this.searchTerm;
     });
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
   } 
+
+  getAllProduct(){
+    this.productService.getAllProduct().subscribe({
+      next:(res)=>{
+        this.apiProduct=res
+        this.filteredItems=this.apiProduct
+        console.log(res)
+      }
+    })
+  }
 }
 
 
