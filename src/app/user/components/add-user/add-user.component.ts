@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../Models/user';
 import { UserService } from '../../Service/user.service';
 import Swal from 'sweetalert2';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-user',
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class AddUserComponent implements OnInit {
   //////////////////////
-  // apiUser: User[] = [];
+  apiUser: User[] = [];
   user: User = {} as User;
   registerForm!: FormGroup;
   userId: string | null = '';
@@ -21,8 +22,14 @@ export class AddUserComponent implements OnInit {
 
   selectedImage!: File;
 
-  constructor(private formBuilder: FormBuilder,private userService: UserService,private activatedRoute: ActivatedRoute,private router: Router,) {}
-  
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       name: [
@@ -36,29 +43,40 @@ export class AddUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
     });
-///////////////////////
-   this.getUser()
+    ///////////////////////
+    this.getUser();
 
+    const id = this.data?.id;
+    console.log(id);
+    this.userService.getUserById(id).subscribe((User: any) => {
+      this.user = User;
+      console.log(User);
+    });
 
+    console.log(`Received data: ${JSON.stringify(this.data)}`);
+    // this.categorySer.getCategories().subscribe({
+    //  next:(res)=>{
+    //    this.categories=res;
+    //    console.log(this.categories);
   }
 
-  getUser(){
-  this.userId = this.activatedRoute.snapshot.paramMap.get('id');
-  this.sub = this.userService.getUserById(this.userId!).subscribe({
-    next: (res) => {
-      this.user = res;
-      console.log(res)
-    },
-    error: (err) => {
-      // alert("error try again")
-      // Swal.fire({
-      //   icon: 'error',
-      //   title: 'Oops...',
-      //   text: err.message,
-      //   footer: '<a href="">Why do I have this issue?</a>',
-      // });
-    },
-  });
+  getUser() {
+    this.userId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.sub = this.userService.getUserById(this.userId!).subscribe({
+      next: (res) => {
+        this.user = res;
+        console.log(res);
+      },
+      error: (err) => {
+        // alert("error try again")
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: 'Oops...',
+        //   text: err.message,
+        //   footer: '<a href="">Why do I have this issue?</a>',
+        // });
+      },
+    });
   }
   get name() {
     return this.registerForm.get('name');
@@ -80,21 +98,53 @@ export class AddUserComponent implements OnInit {
     formData.append('email', this.registerForm.get('email')?.value);
     formData.append('gender', this.registerForm.get('gender')?.value);
   }
-   ///////////
-   update(){
-    this.userService.updateUser(this.user, this.userId!).subscribe({
+  ///////////
+  getAllUsers() {
+    this.userService.getAllUsers().subscribe({
       next: (res) => {
-        console.log(res);
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Your product has been edit',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this.router.navigate(['/dashboard/users']);
+        // console.log(res);
+        // console.log(this.filteredItems);
+        // console.log(this.apiUser);
+        this.apiUser = res;
+        // this.filteredItems = this.apiUser;
       },
-      error: () => {},
     });
+  }
+
+  updateuser() {
+    console.log(this.user);
+    this.userService.updateUser(this.user, this.data.id).subscribe(
+      {
+        next: (data) => {
+          console.log(data);
+          // window.location.reload();
+        },
+        error: (err) => {
+          this.getAllUsers();
+        }
+      }
+      
+   );
+   this.getAllUsers();
+
+  }
+  // (data) => {
+  //   console.log(data);
+
+  //   console.log('success update record', data);
+
+  //   this.getAllUsers();
+  // }
+
+
+
+
+  deleteuser(id: any) {
+    this.userService.deleteUser(id).subscribe(
+      (data) => {
+      console.log('record deleted successfuly', data);
+      this.getAllUsers();
+    });
+    console.log(id);
   }
 }

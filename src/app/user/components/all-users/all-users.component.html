@@ -8,9 +8,9 @@
       <div class="col-6 d-flex justify-content-start">
         <h2>Users</h2>
       </div>
-      <div class="col-6 d-flex justify-content-end">
+      <!-- <div class="col-6 d-flex justify-content-end">
         <button class="Add">Add User</button>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -56,7 +56,8 @@
           <td>{{item.gender}}</td>
           <!-- <td>{{item.updated_at}}</td>
           <td>{{item.created_at}}</td> -->
-          <td  [routerLink]="['/dashboard/users/add',item.id]" ><i class="fas fa-pen bg-info p-2"></i></td>
+          <!-- [routerLink]="['/dashboard/users/add',item.id]" -->
+          <td><i class="fas fa-pen bg-info p-2" (click)="openUpdateDialog(item.id)" ></i></td>
           <td (click)="deleteUser(item.id!)"><i class="fas fa-trash bg-danger p-2"></i></td>
         </tr>
       </tbody>

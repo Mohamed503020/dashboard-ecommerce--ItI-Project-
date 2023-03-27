@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -21,8 +22,8 @@ constructor(private productService:ProductService){}
   filteredItems: any[] = this.apiProduct;
 
   ngOnInit() {
-    this.calculatePageNumbers();
     this.getAllProduct();
+    this.calculatePageNumbers();
   }
 
   calculatePageNumbers() {
@@ -79,6 +80,29 @@ constructor(private productService:ProductService){}
         console.log(res)
       }
     })
+  }
+
+  deleteProduct(id: any) {
+      this.productService.deleteProduct(id).subscribe({
+        next:(data)=>{
+          this.getAllProduct();
+          console.log(data)
+        },
+        error:(error)=>{
+          console.log(error)
+          this.getAllProduct();
+
+        }
+      });
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your product has been delete',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    
+    this.getAllProduct();
   }
 }
 

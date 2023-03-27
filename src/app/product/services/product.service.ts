@@ -23,4 +23,15 @@ return this._httpClient.post('http://localhost:8000/api/products',product,{heade
     getSingleProduct(id: number): Observable<any> {
       return this._httpClient.get<any>(`http://localhost:8000/api/products/${id}`)
     }
+
+    deleteProduct(id:number): Observable<any> {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('adminToken')}`
+        })
+      };
+      return this._httpClient.delete<any>(`http://localhost:8000/api/products/${id}`,httpOptions);
+  
+    }
 }

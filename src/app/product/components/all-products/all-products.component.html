@@ -57,7 +57,7 @@
           <td>{{item.discount | percent }}</td>
           <td>{{item.rate}}</td>
           <td><i class="fas fa-pen bg-info p-2"></i></td>
-          <td><i class="fas fa-trash bg-danger p-2"></i></td>
+          <td  (click)="deleteProduct(item.id!)"><i class="fas fa-trash bg-danger p-2"></i></td>
         </tr>
       </tbody>
     </table>

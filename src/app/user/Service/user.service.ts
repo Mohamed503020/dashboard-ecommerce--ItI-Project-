@@ -16,7 +16,7 @@ export class UserService {
     return this.httpClient.get<User>(`http://localhost:8000/api/showUser/${id}`);
   }
 
-  updateUser(userInfo:User,id:string)  {
+  updateUser(userInfo:User,id:number)  {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export class UserService {
 
 
   }
-  deleteUser(id:string): Observable<User> {
+  deleteUser(id:number): Observable<User> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

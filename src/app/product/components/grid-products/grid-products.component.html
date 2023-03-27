@@ -3,12 +3,12 @@
   <div class="row">
       <!-- ///////////////////1///////////////// -->
 
-      <div class="col-md-3 col-sm-6 mb-4" *ngFor="let item of apiProduct">
+      <div class="col-md-4 col-sm-6 mb-4" *ngFor="let item of apiProduct">
           <div class="product-grid">
               <div class="product-image">
                   <a href="#" class="image">
                       <img class="pic-1"
-                          [src]="item.images[0]">
+                          [src]="item.images[0]" style="width: 350px; height: 350px;">
                       <img class="pic-2"
                       [src]="item.images[1]">
                   </a>

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../Models/user';
 import { UserService } from '../../Service/user.service';
 import Swal from 'sweetalert2';
+import {MatDialog} from '@angular/material/dialog';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 
 // interface user {
@@ -120,7 +124,7 @@ export class AllUsersComponent implements OnInit {
   // ]
   apiUser: User[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,public dialog: MatDialog,private router: Router,private http:HttpClient) {}
   pageSize = 5;
   startIndex = 0;
   endIndex = this.pageSize;
@@ -147,7 +151,7 @@ export class AllUsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         // console.log(res);
-        console.log(this.filteredItems);
+        // console.log(this.filteredItems);
         // console.log(this.apiUser);
         this.apiUser = res;
         this.filteredItems = this.apiUser;
@@ -202,7 +206,7 @@ export class AllUsersComponent implements OnInit {
     this.calculatePageNumbers();
     this.goToPage(1);
   }
-  deleteUser(id: string) {
+  deleteUser(id: number) {
     if (confirm('Are you sure you want to delete this user')) {
       this.userService.deleteUser(id).subscribe({
         next:(data)=>{
@@ -218,4 +222,40 @@ export class AllUsersComponent implements OnInit {
       })
     }
   }
+
+//   openDialog() {
+//     const dialogRef = this.dialog.open(AddUserComponent, {
+//       width:'500px', height:'400px'
+//     });
+//     dialogRef.afterClosed().subscribe(result => {
+//       console.log(`Dialog result: ${result}`);
+//       this.getAllUsers();
+//     });
+// }
+
+openUpdateDialog(id:any) {
+console.log(id)
+  this.http.get(`http://localhost:8000/api/showUser/${id}`).subscribe((data: any) => {
+    // Pass the fetched data to the UpdateCategoryComponent dialog.
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      width: '500px',
+      height: '400px',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+        // Handle the returned data here.
+        console.log(`Returned data: ${JSON.stringify(result)}`);
+        // console.log(`Dialog result: ${result}`);
+        this.getAllUsers();
+        
+      
+    });
+  });
+
+  this.getAllUsers();
+
+}
+
 }
