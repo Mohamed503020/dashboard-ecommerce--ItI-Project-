@@ -10,6 +10,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MessagesComponent } from './components/messages/messages.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     AllUsersComponent,
     AddUserComponent,
     UsergridComponent,
+    MessagesComponent,
     
   ],
   imports: [

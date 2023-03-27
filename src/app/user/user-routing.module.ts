@@ -3,11 +3,13 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllUsersComponent } from './components/all-users/all-users.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 const routes: Routes = [
   {path:"",component:AllUsersComponent},
   {path:"add",component:AddUserComponent},
   {path:"grid",component:UsergridComponent},
+  {path:"messages",component:MessagesComponent},
   {path:":id",component:AddUserComponent}
 ];
 
