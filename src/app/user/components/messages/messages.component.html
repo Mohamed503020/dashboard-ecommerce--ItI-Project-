@@ -1,1 +1,30 @@
-<p>messages works!</p>
+<div class="container bg-light mt-1 p-1 border rounded shadow">
+    <div *ngFor="let message of messages" class="message">
+      <div class="message-header">
+        <div class="row align-items-center m-1">
+            <div class="col-auto">
+              <img src="https://thumbs.dreamstime.com/z/profile-icon-male-avatar-portrait-casual-person-silhouette-face-flat-design-vector-46846325.jpg" alt="">
+            </div>
+            <div class="col">
+                <h4 class="mt-1">{{message.userEmail}}</h4>
+            </div>
+        </div>
+        <h5 class="message-title ms-3">{{ message.userName}}</h5>
+      </div>
+      <div class="message-body m-3">{{ message.userMessage.slice(0,150) }}{{ message.userMessage.length > 150 ? '...' : '' }}</div>
+      <div class="message-actions">
+        <button class="btn btn-primary btn-sm m-1 p-1" (click)="showMessage(message)">Show Message</button>
+        <button class="btn btn-success btn-sm m-1 p-1" (click)="copyEmail(message.userEmail)">Copy Email</button>
+      </div>
+      <hr>
+    </div>
+  
+    <div *ngIf="selectedMessage" class="message-overlay">
+      <div class="message-box">
+        <h5>{{ selectedMessage.userName }}</h5>
+        <p>{{ selectedMessage.userMessage }}</p>
+        <button class="btn btn-primary" (click)="selectedMessage = null">Close</button>
+      </div>
+    </div>
+  </div>
+  
