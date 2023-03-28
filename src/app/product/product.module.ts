@@ -12,8 +12,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { GridProductsComponent } from './components/grid-products/grid-products.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 // import { NgxStarRatingModule } from 'ngx-star-rating';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+
+
+
+
+
 
 @NgModule({
+  
   declarations: [
     AllProductsComponent,
     ProductDetailsComponent,
@@ -28,7 +40,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    MatInputModule,
+    HttpClientModule 
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class ProductModule { }
