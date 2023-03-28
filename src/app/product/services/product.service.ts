@@ -49,8 +49,8 @@ export class ProductService {
       'Authorization',
       `Bearer ${this.token}`
     );
-    return this._httpClient.patch(
-      `http://localhost:8000/api/products/${id}`,
+    return this._httpClient.post(
+      `http://localhost:8000/api/product/update/${id}`,
       product,
       { headers }
     );

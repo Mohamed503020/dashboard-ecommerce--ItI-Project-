@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { Category } from 'src/app/Models/category';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -17,12 +17,15 @@ export class AddProductComponent implements OnInit {
   productId!: number;
   buttonText: string = '';
   product: any;
+  title:string='';
   constructor(
     private formBuilder: FormBuilder,
     private _ProductService: ProductService,
     private _CategoryService: CategoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _router: Router,
   ) {}
+
   ngOnInit() {
     this._CategoryService.getCategories().subscribe({
       next: (res) => {
@@ -30,7 +33,6 @@ export class AddProductComponent implements OnInit {
         console.log(this.categories);
       },
     });
-
     // this.getProductId();
 
     this.productForm = this.formBuilder.group({
@@ -57,8 +59,11 @@ export class AddProductComponent implements OnInit {
 
     if (this.productId) {
       this.buttonText = 'updateProduct';
+      this.title='Update Product';
     } else {
       this.buttonText = 'addProduct';
+      this.title='Add Product';
+
     }
   }
   // onImageUpload(event:any) {
@@ -95,12 +100,13 @@ export class AddProductComponent implements OnInit {
     formData.append('rate', this.productForm.get('rate').value);
     formData.append('description', this.productForm.get('description').value);
     formData.append('status', this.productForm.get('status').value);
-    formData.append('image', this.productForm.get('image')?.value);
+    formData.append('image', this.productForm.get('images')?.value);
     
     if (this.productId) {
       this._ProductService.updateProduct(this.productId,formData).subscribe({
         next: (data)=>{
           console.log(data);
+          this._router.navigateByUrl('/dashboard/products')
         }
       })
     } else {
