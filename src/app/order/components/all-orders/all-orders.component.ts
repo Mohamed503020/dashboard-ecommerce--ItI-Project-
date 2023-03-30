@@ -180,5 +180,32 @@ export class AllOrdersComponent {
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
-  } 
+  }
+  
+  
+  // openUpdateDialog(id:any) {
+  //   console.log(id)
+  //     this.http.get(`http://localhost:8000/api/showUser/${id}`).subscribe((data: any) => {
+  //       // Pass the fetched data to the UpdateCategoryComponent dialog.
+  //       const dialogRef = this.dialog.open(AddUserComponent, {
+  //         width: '500px',
+  //         height: '400px',
+  //         data: data
+  //       });
+    
+  //       dialogRef.afterClosed().subscribe(result => {
+          
+  //           // Handle the returned data here.
+  //           console.log(`Returned data: ${JSON.stringify(result)}`);
+  //           // console.log(`Dialog result: ${result}`);
+  //           this.getAllUsers();
+            
+          
+  //       });
+  //     });
+    
+  //     this.getAllUsers();
+    
+  //   }
+
 }

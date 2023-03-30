@@ -14,8 +14,8 @@ import { HttpClient } from '@angular/common/http';
 //   email: string;
 //   phone: string;
 //   joinOn: string;
-
 // }
+
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
