@@ -206,17 +206,22 @@ export class AllUsersComponent implements OnInit {
     this.calculatePageNumbers();
     this.goToPage(1);
   }
-  deleteUser(id: number) {
-    if (confirm('Are you sure you want to delete this user')) {
+  async deleteUser(id: number) {
+    if (await Swal.fire(
+      'Confirm the deletion?',
+      'Are you sure you want to delete this user?',
+      'question'
+    ) ) {
       this.userService.deleteUser(id).subscribe({
         next:(data)=>{
           this.getAllUsers();
         }
       });
+      
       Swal.fire({
-        position: 'top-end',
+        // position: 'top-end',
         icon: 'success',
-        title: 'Your product has been delete',
+        title: 'User has been delete',
         showConfirmButton: false,
         timer: 1500
       })

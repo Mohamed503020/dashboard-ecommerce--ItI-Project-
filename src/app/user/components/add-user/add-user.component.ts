@@ -32,15 +32,8 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(50),
-        ],
-      ],
-      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,15}$')]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.com$')]],
       gender: ['', Validators.required],
     });
     ///////////////////////
@@ -113,20 +106,29 @@ export class AddUserComponent implements OnInit {
 
   updateuser() {
     console.log(this.user);
-    this.userService.updateUser(this.user, this.data.id).subscribe(
-      {
-        next: (data) => {
-          console.log(data);
-          // window.location.reload();
-        },
-        error: (err) => {
-          this.getAllUsers();
-        }
-      }
-      
-   );
-   this.getAllUsers();
-
+    this.userService.updateUser(this.user, this.data.id).subscribe({
+      next: (data) => {
+        console.log(data);
+        // window.location.reload();
+        Swal.fire({
+          // position: 'top-end',
+          icon: 'success',
+          title: 'Your product has been delete',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      error: (err) => {
+        this.getAllUsers();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+      },
+    });
+    this.getAllUsers();
   }
   // (data) => {
   //   console.log(data);
@@ -136,12 +138,8 @@ export class AddUserComponent implements OnInit {
   //   this.getAllUsers();
   // }
 
-
-
-
   deleteuser(id: any) {
-    this.userService.deleteUser(id).subscribe(
-      (data) => {
+    this.userService.deleteUser(id).subscribe((data) => {
       console.log('record deleted successfuly', data);
       this.getAllUsers();
     });

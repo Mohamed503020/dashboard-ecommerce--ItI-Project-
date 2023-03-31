@@ -17,12 +17,31 @@
                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                       <div class="col-md-6 col-lg-5 row">
                         <div class="col-12 mb-3">
-                          <label>Imagees Product :</label>
+                          <!-- <label>Imagees Product :</label> -->
                           <!-- <input type="file" id="images" formControlName="image" (change)="onImageUpload($event)" multiple > -->
-                          <input type="file" formControlName="image" (change)="onFileChange($event)" multiple>
+                          <!-- <input type="file" formControlName="image" (change)="onFileChange($event)" multiple> -->
+
+                          <!-- *************************new*********************************** -->
+                          <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+                            (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+                            <p>Drag and drop images here or click to select files</p>
+                            <input #fileInput type="file" hidden (change)="onFileSelected($event)"
+                              (change)="onFileChange($event)" multiple formControlName="image">
+                          </div>
+                          <div *ngIf="imageUrls && imageUrls.length > 0">
+                            <div class="uploaded-image-container">
+                              <img class="uploaded-image uploaded-main-image" [src]="imageUrls[0]" alt="Uploaded Image">
+                            </div>
+                            <div class="uploaded-image-container">
+                              <ng-container *ngFor="let imageUrl of imageUrls.slice(1)">
+                                <img class="uploaded-image uploaded-thumbnail" [src]="imageUrl"
+                                  alt="Uploaded Thumbnail">
+                              </ng-container>
+                            </div>
+                          </div>
+                          <!-- *************************new*********************************** -->
 
                         </div>
-
                       </div>
                       <!-- <div class="col-md-5 col-lg-5 col-sm-12">
                                             <div class="position-relative">
@@ -110,21 +129,22 @@
                           <!-- /////////////////Select Category////////////////////// -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <select formControlName="category_id" class="form-select"
-                                aria-label="Default select example">
+                              <select formControlName="category_id" class="form-select" name="selectedCategory"
+                                aria-label="Default select example" [(ngModel)]=" selectedCategory">
                                 <option value={{Category.id}} *ngFor="let Category of categories"
-                                  [attr.selected]="Category.name === product.category ? 'selected' : null">{{Category.name}}
-                                </option>
+                                  [selected]="Category.name == selectedCategory">{{Category.name}}</option>
                               </select>
                             </div>
                           </div>
                           <!-- ///status // -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <select formControlName="status" class="form-select" aria-label="Default select example">
+                              <select formControlName="status" class="form-select" aria-label="Default select example"
+                                [(ngModel)]=" productStates">
                                 <option selected>Stauts</option>
-                                <option value="available">T-available</option>
-                                <option value="inavailable">inavailable</option>
+                                <option value="available" [selected]="productStates=='available'">available</option>
+                                <option value="inavailable" [selected]="productStates=='inavailable'">inavailable
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -185,6 +205,12 @@
   </div>
 </section>
 
+<!-- 
+<div *ngIf="imageUrl">
+  <img [src]="imageUrl" alt="Uploaded Image">
+</div> -->
+
+
 
 
 <!-- <input type="file" (change)="onFileSelected($event)" style="display: none;">
@@ -193,6 +219,31 @@
 
 <!-- <button class="btn" (click)="selectImage.click()" for="file-input">
     <i class="fa fa-file"></i>
-</button>
-<input #selectImage id="file-input" type="file" (change)="onFileSelected($event)" style="display: none;">
+</button> -->
+<!-- <input #selectImage id="file-input" type="file" (change)="onFileSelected($event)" style="display: none;">
 <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image" width="50px" height="80px"> -->
+
+
+
+<!-- <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+  <p>Drag and drop images here</p>
+  <input #fileInput type="file" hidden (change)="onFileSelected($event)">
+</div>
+<div *ngIf="imageUrl">
+  <img [src]="imageUrl" alt="Uploaded Image">
+</div> -->
+
+<!-- <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+  <p>Drag and drop images here or click to select files</p>
+  <input #fileInput type="file" hidden (change)="onFileSelected($event)" multiple>
+</div>
+<div *ngIf="imageUrls && imageUrls.length > 0">
+  <div class="uploaded-image-container">
+    <img class="uploaded-image uploaded-main-image" [src]="imageUrls[0]" alt="Uploaded Image">
+  </div>
+  <div class="uploaded-image-container">
+    <ng-container *ngFor="let imageUrl of imageUrls.slice(1)">
+      <img class="uploaded-image uploaded-thumbnail" [src]="imageUrl" alt="Uploaded Thumbnail">
+    </ng-container>
+  </div>
+</div> -->

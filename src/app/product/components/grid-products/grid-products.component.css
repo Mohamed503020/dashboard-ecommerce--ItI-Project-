@@ -95,7 +95,7 @@
   color: rgb(136, 170, 243);
   font-size: 13px;
 }
-.product-grid .rating li.far{ color: #999; }
+.product-grid .rating li.far{ color: #c6c3c3; }
 .product-grid .add-to-cart{
   color:rgb(136, 170, 243);
   font-size: 14px;
@@ -109,7 +109,7 @@
   border-color: #000;
 }
 .product-grid .product-content{
-  background: #eee;
+  background: #cecdcd;
   padding: 15px;
 }
 .product-grid .title{

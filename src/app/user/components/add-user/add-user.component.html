@@ -12,8 +12,8 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline"> -->
-                    <!-- ///////////////// -->
-                    <!-- <label for="email">Image</label>
+<!-- ///////////////// -->
+<!-- <label for="email">Image</label>
                     <input type="file" class="form-control" name="image" required>
                     <label class="form-label" for="firstName">Name</label>
                     <input type="text" id="Name" class="form-control form-control-lg" placeholder="Mohamed"
@@ -152,37 +152,38 @@
 </div> -->
 
 
-<button mat-icon-button style="float :right; margin: 5px;"matDialogClose>
+<button mat-icon-button style="float :right; margin: 5px;" matDialogClose>
   <mat-icon>close</mat-icon>
 </button>
 <mat-dialog-content>
   <header>
-      <h1>Update User</h1>
+    <h1>Update User</h1>
   </header>
 </mat-dialog-content>
 
 <div class="container">
   <form [formGroup]="registerForm" (ngSubmit)="updateuser()" enctype="multipart/form-data">
     <div class="form-group m-3">
-      <label for="name" >Name</label>
+      <label for="name">Name</label>
       <input [(ngModel)]="user.name" type="text" formControlName="name" id="name" class="form-control">
-      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
-        <div *ngIf="name?.errors?.['required']">Name is required.</div>
-        <div *ngIf="name?.errors?.['minlength']">Name must be at least {{ name?.errors?.['minlength'].requiredLength }} characters long.</div>
-        <div *ngIf="name?.errors?.['maxlength']">Name cannot be more than {{ name?.errors?.['maxlength'].requiredLength }} characters long.</div>
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger mt-1">
+        <p *ngIf="name?.errors?.['required']">Name is required <i class="fa-solid error fa-circle-exclamation"></i></p>
+        <p *ngIf="name?.errors?.['pattern']">Name must be between 3 and 15 characters <i
+            class="fa-solid error fa-circle-exclamation"></i></p>
       </div>
     </div>
     <div class="form-group m-3">
       <label for="email">Email</label>
-      <input [(ngModel)]="user.email" type="email" name="email"  formControlName="email" id="email" class="form-control">
-      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
-        <div *ngIf="email?.errors?.['required']">Email is required.</div>
-        <div *ngIf="email?.errors?.['email']">Email must be a valid email address.</div>
+      <input [(ngModel)]="user.email" type="email" name="email" formControlName="email" id="email" class="form-control">
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger mt-1">
+        <p *ngIf="email?.errors?.['required']">Email is required <i class="fa-solid error fa-circle-exclamation"></i></p>
+        <p *ngIf="email?.errors?.['pattern']">Please enter a valid email address ending with '.com' <i
+            class="fa-solid error fa-circle-exclamation"></i></p>
       </div>
     </div>
     <div class="form-group m-3">
       <label for="gender">Gender</label>
-      <select formControlName="gender" [(ngModel)]="user.gender"  class="form-control" name="gender" >
+      <select formControlName="gender" [(ngModel)]="user.gender" class="form-control" name="gender">
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="other">Other</option>
@@ -198,9 +199,9 @@
 
 
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-          <button class="btn btn-danger" type="button" matDialogClose>Cancle</button>
-          <button class="btn save me-md-2" type="submit" (click)="updateuser()" matDialogClose>update</button>
-        </div>
-    </form>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+      <button class="btn btn-danger" type="button" matDialogClose>Cancle</button>
+      <button class="btn save me-md-2" type="submit" (click)="updateuser()" matDialogClose>update</button>
+    </div>
+  </form>
 </div>
