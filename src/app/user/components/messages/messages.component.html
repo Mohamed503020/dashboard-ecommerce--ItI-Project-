@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="col-6 d-flex justify-content-start mt-5 ms-3">
+    <h2>Messages User</h2>
+  </div>
+  <div class="row justify-content-center mt-2">
+    <div *ngFor="let message of messages" class="message m-4 col-md-3 bg-light p-1 rounded shadow justify-content-center">
+      <div class="message-header">
+        <div class="row align-items-center m-1">
+            <div class="col-auto">
+              <img src="https://thumbs.dreamstime.com/z/profile-icon-male-avatar-portrait-casual-person-silhouette-face-flat-design-vector-46846325.jpg" alt="">
+            </div>
+            <div class="col">
+                <h4 class="mt-1">{{message.userEmail}}</h4>
+            </div>
+        </div>
+        <h5 class="message-title ms-3">{{ message.userName}}</h5>
+      </div>
+      <div class="message-body m-3">{{ message.userMessage.slice(0,30) }}{{ message.userMessage.length > 30 ? '...' : '' }}</div>
+      <div class="message-actions">
+        <button class="btn btn-primary btn-sm m-1 p-1" (click)="showMessage(message)">Show Message</button>
+        <button class="btn btn-success btn-sm m-1 p-1" (click)="copyEmail(message.userEmail)">Copy Email</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedMessage" class="message-overlay">
+      <div class="message-box">
+        <h5>{{ selectedMessage.userName }}</h5>
+        <p>{{ selectedMessage.userMessage }}</p>
+        <button class="btn btn-primary" (click)="selectedMessage = null">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

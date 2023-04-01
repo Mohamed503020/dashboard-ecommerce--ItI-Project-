@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MessagesComponent } from './components/messages/messages.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     AllUsersComponent,
     AddUserComponent,
     UsergridComponent,
+    MessagesComponent,
     
   ],
   imports: [
