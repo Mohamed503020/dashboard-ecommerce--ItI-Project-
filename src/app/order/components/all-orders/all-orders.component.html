@@ -56,13 +56,13 @@
       <tbody>
         <tr *ngFor="let item of filteredItems.slice(startIndex, endIndex)">
           <td>{{ item.id }}</td>
-          <td>{{item.customer}}</td>
-          <td>{{item.email}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.user.email}}</td>
           <td>{{item.item}}</td>
-          <td>{{item.price| currency:'EGP'}}</td>
-          <td>{{item.status}}</td>
-          <td>{{item.date}}</td>
-          <td><i class="fas fa-pen bg-info p-2" ></i></td>
+          <td>{{item.total_price| currency:'EGP'}}</td>
+          <td>{{item.payment_status}}</td>
+          <td>{{item.created_at|date:'MMM d, y'}}</td>
+          <td><a  href="" [routerLink]="['/dashboard/orders/',item.id]"><i class="fas fa-pen bg-info p-2"></i></a></td>
           <td><i class="fas fa-trash bg-danger p-2"></i></td>
           <!-- (click)="openUpdateDialog(item.id)" -->
         </tr>
