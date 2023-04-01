@@ -1,19 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/Models/category';
 import { CategoryService } from '../../services/category.service';
+import { FormBuilder,Validators  } from '@angular/forms';
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.css']
 })
-export class AddCategoryComponent {
+export class AddCategoryComponent implements OnInit{
   categories:Category[]=[];
   category:Category={} as Category;
+  categoryForm: any;
 
- constructor(private categorySer:CategoryService){
+ constructor(private categorySer:CategoryService, private formBuilder: FormBuilder,){
 this.getAllCategories();
  }
+  ngOnInit(): void {
+    this.categoryForm = this.formBuilder.group({
+      category: ['',[Validators.required,Validators.pattern("^(?=.{3,15}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
+    });
+  }
  getAllCategories(){
   this.categorySer.getCategories().subscribe({
     next:(res)=>{
@@ -41,5 +48,11 @@ this.getAllCategories();
       }
     })
     this.getAllCategories()
+  }
+
+  
+
+  get name() {
+    return this.categoryForm.get('category');
   }
 }

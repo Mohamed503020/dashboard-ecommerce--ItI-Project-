@@ -22,6 +22,8 @@ export class AddProductComponent implements OnInit {
   title: string = '';
   selectedCategory: string = '';
   productStates: string = '';
+  
+
 //  *************************new***********************************
   imageUrl!: string;
   imageUrls: string[] = [];
@@ -45,13 +47,13 @@ export class AddProductComponent implements OnInit {
     // this.getProductId();
 
     this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      category_id: ['', Validators.required],
-      price: ['', Validators.required],
-      quantity: ['', Validators.required],
-      discount: ['', Validators.required],
-      rate: ['', Validators.required],
-      description: ['', Validators.required],
+      name: ['',[Validators.required,Validators.pattern("^(?=.{1,20}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
+      category_id: ['',[Validators.required, Validators.pattern("^[0-9]{1,10}$")]],
+      price: ['', [Validators.required, Validators.pattern("^[0-9]{2,10}$")]],
+      quantity: ['',[Validators.required, Validators.pattern("^[0-9]{1,10}$")]],
+      discount: ['', [Validators.required,Validators.pattern("^[0-9]{1,3}$")]],
+      rate: ['',[Validators.required, Validators.pattern("^[0-5]{1}$")]],
+      description: ['', [Validators.required,Validators.pattern("^(?=.{1,200}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
       status: ['', Validators.required],
       image: [[], Validators.required],
     });
@@ -198,5 +200,32 @@ export class AddProductComponent implements OnInit {
         console.log(error.message);
       },
     });
+  }
+  get name() {
+    return this.productForm.get('name');
+  }
+  get category_id() {
+    return this.productForm.get('category_id');
+  }
+  get price() {
+    return this.productForm.get('price');
+  }
+  get quantity() {
+    return this.productForm.get('quantity');
+  } 
+  get discount() {
+    return this.productForm.get('discount');
+  }
+  get rate() {
+    return this.productForm.get('rate');
+  }
+  get description() {
+    return this.productForm.get('description');
+  }
+  get status() {
+    return this.productForm.get('status');
+  }
+  get image() {
+    return this.productForm.get('image');
   }
 }
