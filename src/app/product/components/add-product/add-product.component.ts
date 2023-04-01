@@ -173,6 +173,7 @@ export class AddProductComponent implements OnInit {
           console.log(data);
           alert('success');
           this.productForm.reset();
+          this.imageUrls=[];
         },
         error: (error) => alert(error.message),
       });

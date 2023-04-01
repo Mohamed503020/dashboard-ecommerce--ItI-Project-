@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AllOrdersService } from '../allOrders.service';
 interface Order {
   id:number;
   name: string;
   total_price: number;
   item: number;
-  payment_status: string;
+  payment_status: number;
   created_at: string;
   user:{
     id:number,
     email:string,
   };
+ 
+}
+
+ interface OrderStatus {
  
 }
 @Component({
@@ -30,7 +35,7 @@ export class AllOrdersComponent {
   searchTerm = '';
   filteredItems: Order[] = this.orders;
 
-  constructor(private orderServ:AllOrdersService){
+  constructor(private orderServ:AllOrdersService,private route: ActivatedRoute, private router: Router){
 
   }
 
@@ -46,12 +51,24 @@ export class AllOrdersComponent {
     })
    }
   ngOnInit() {
-    console.log(10);
+    // console.log(10);
     
     this.calculatePageNumbers();
     this.getOrders();
+    
   }
+  changeStatus(id:number,status:number){
+      this.orderServ.changeOrderStatus(id,+status).subscribe({
+        next:(data)=>{
+          // this.router.navigate(['/dashboard/orders']);
+          console.log(typeof status);
+          // this.router.navigate([this.route.snapshot.url.join('/dashboard/orders')])
+          this.getOrders();
 
+        }
+      })
+       
+  }
   calculatePageNumbers() {
     const totalPages = Math.ceil(this.filteredItems.length / this.pageSize);
     this.pageNumbers = Array(totalPages).fill(0).map((_, i) => i + 1);
@@ -95,9 +112,7 @@ export class AllOrdersComponent {
         if (this.searchType=='email'){
           return item.user.email.toLowerCase().includes(searchTermLower)
         }
-        if (this.searchType=='status'){
-          return item.payment_status.toLowerCase().includes(searchTermLower)
-        }
+      
         if (this.searchType=='item'){
           return String(item.item).toLowerCase().includes(searchTermLower)
         }

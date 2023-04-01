@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AllOrdersService } from '../allOrders.service';
-interface Order{
+interface OrderDetail{
   order_id: number;
   quantity:number,
   price:number,
+  order:{
+    payment_status:number
+  },
   product: {
     id: number;
     name: string;
@@ -16,7 +19,6 @@ interface Order{
         imgPath:string,
       }[]
     }
-    payment_status:number
   };
 
 @Component({
@@ -27,11 +29,15 @@ interface Order{
 export class OrderDetailsComponent {
   constructor(private orderServ:AllOrdersService,private router:ActivatedRoute){}
    totalPrice:any=0;
-  orders: Order []= [];
-
+  orders: OrderDetail []= [];
+  now = new Date();
+  twoDaysAfter: any;
 
   orderId:any;
   ngOnInit(): void {
+    this.twoDaysAfter = new Date(
+      this.now.setDate(this.now.getDate() + 3)
+    );
     this.orderId=this.router.snapshot.paramMap.get('id');
     console.log(this.orderId);
     

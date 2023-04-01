@@ -45,12 +45,11 @@
           <th>ID</th>
           <th>Coustomer</th>
           <th>Email</th>
-          <th>Itme</th>
           <th>Price</th>
           <th>Status</th>
           <th>Date</th>
           <th>Edit</th>
-          <th>Delete</th>
+          <th>change status</th>
         </tr>
       </thead>
       <tbody>
@@ -58,13 +57,21 @@
           <td>{{ item.id }}</td>
           <td>{{item.name}}</td>
           <td>{{item.user.email}}</td>
-          <td>{{item.item}}</td>
+        
           <td>{{item.total_price| currency:'EGP'}}</td>
-          <td>{{item.payment_status}}</td>
+          <!-- <td >{{item.payment_status}}</td> -->
+          <td *ngIf="item.payment_status==1">deliverd</td>
+          <td *ngIf="item.payment_status==2">in progress </td>
+          <td *ngIf="item.payment_status==3">out of deliverd</td>
+          <td *ngIf="item.payment_status==4">deliverd</td>
           <td>{{item.created_at|date:'MMM d, y'}}</td>
           <td><a  href="" [routerLink]="['/dashboard/orders/',item.id]"><i class="fas fa-pen bg-info p-2"></i></a></td>
-          <td><i class="fas fa-trash bg-danger p-2"></i></td>
-          <!-- (click)="openUpdateDialog(item.id)" -->
+          <!-- <td *ngIf="item.payment_status=='1'">deliverd</td> -->
+          <td *ngIf="item.payment_status==2"><button class="btn btn-success" (click)="changeStatus(item.id,2)">out of deliverd</button>  </td>
+          <td *ngIf="item.payment_status==3"><button class="btn btn-success" (click)="changeStatus(item.id,3)">deliverd</button> </td>
+          <td *ngIf="item.payment_status==4">done</td>
+
+          <!-- <i class="fas fa-trash bg-danger p-2"></i> -->
         </tr>
       </tbody>
     </table>
