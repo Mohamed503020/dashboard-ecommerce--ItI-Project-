@@ -10,8 +10,15 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>("http://localhost:8000/api/users");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${localStorage.getItem('adminToken')}`
+      })
+    };
+    return this.httpClient.get<User[]>("http://localhost:8000/api/users",httpOptions);
   }
+
   getUserById(id: string): Observable<User> {
     return this.httpClient.get<User>(`http://localhost:8000/api/showUser/${id}`);
   }
