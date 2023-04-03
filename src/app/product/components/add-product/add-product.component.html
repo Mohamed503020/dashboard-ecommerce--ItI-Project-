@@ -1,19 +1,17 @@
 <section class="h-100 h-custom">
   <div class="container py-2 px-3 h-100">
     <div class="d-flex justify-content-between align-items-center py-3">
-      <h1>Add Product</h1>
+      <h1>{{title}}</h1>
       <button class="btn" type="submit">View All Product</button>
     </div>
   </div>
   <div class="container py-2 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
-        <div
-          class="card card-registration card-registration-2"
-          style="border-radius: 15px"
-        >
+        <div class="card card-registration card-registration-2" style="border-radius: 15px">
           <div class="card-body p-0">
             <div class="row g-0">
+<<<<<<< HEAD
               <form [formGroup]="productForm" (ngSubmit)="onSubmit()" >
               <div class="col-lg-12">
                 <div class="p-5">
@@ -31,101 +29,136 @@
 
 
                       </div>
+=======
+              <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                <div class="col-lg-12">
+                  <div class="p-5">
+                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                      <div class="col-md-6 col-lg-5 row">
+                        <div class="col-12 mb-3">
+                          <!-- <label>Imagees Product :</label> -->
+                          <!-- <input type="file" id="images" formControlName="image" (change)="onImageUpload($event)" multiple > -->
+                          <!-- <input type="file" formControlName="image" (change)="onFileChange($event)" multiple> -->
+>>>>>>> mohamedElsoudy
 
-                    </div>
-                    <!-- <div class="col-md-5 col-lg-5 col-sm-12">
+                          <!-- *************************new*********************************** -->
+                          <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+                            (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+                            <p>Drag and drop images here or click to select files</p>
+                            <input #fileInput type="file" hidden (change)="onFileSelected($event)"
+                              (change)="onFileChange($event)" multiple formControlName="image">
+                          </div>
+                          <div *ngIf="imageUrls && imageUrls.length > 0">
+                            <div class="uploaded-image-container">
+                              <img class="uploaded-image uploaded-main-image" [src]="imageUrls[0]" alt="Uploaded Image">
+                            </div>
+                            <div class="uploaded-image-container">
+                              <ng-container *ngFor="let imageUrl of imageUrls.slice(1)">
+                                <img class="uploaded-image uploaded-thumbnail" [src]="imageUrl"
+                                  alt="Uploaded Thumbnail">
+                              </ng-container>
+                            </div>
+                          </div>
+                          <!-- *************************new*********************************** -->
+
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-5 col-lg-5 col-sm-12">
                                             <div class="position-relative">
-                                              <div *ngIf="imageUrl">
-                                                <img [src]="imageUrl" alt="Uploaded image">
-                                              </div>
-
                                                 <div class="image-upload">
-                                                    <label for="file-input">
-                                                        <i
-                                                            class="fa-solid fa-upload position-absolute top-0 start-0"></i>
-                                                    </label>
-                                                    <input type="file" (change)="onFileSelected($event)">
-
+                                                    <button class="btn" (click)="selectImage.click()" for="file-input">
+                                                        <i class="fa-solid fa-upload "></i>
+                                                    </button>
+                                                    <input input #selectImage id="file-input" type="file"
+                                                        (change)="onFileSelected($event)" style="display: none;" />
                                                 </div>
+                                                <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image"
+                                                    class="img-fluid">
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-6 col-lg-3 col-sm-6 mb-4">
                                                     <div class="position-relative">
-                                                        <img src="https://via.placeholder.com/750x500" alt="Image"
-                                                            class="img-fluid">
                                                         <div class="image-upload">
-                                                            <label for="file-input">
-                                                                <i
-                                                                    class="fa-solid fa-upload icons position-absolute top-0 start-0"></i>
-                                                            </label>
-                                                            <input id="file-input" type="file" />
+                                                            <button class="btn" (click)="selectImage.click()" for="file-input">
+                                                                <i class="fa-solid fa-upload "></i>
+                                                            </button>
+                                                            <input input #selectImage id="file-input" type="file"
+                                                                (change)="onFileSelected($event)" style="display: none;" />
                                                         </div>
+                                                        <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image"
+                                                            class="img-fluid">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-lg-3 col-sm-6 mb-4">
                                                     <div class="position-relative">
-                                                        <img src="https://via.placeholder.com/750x500" alt="Image"
-                                                            class="img-fluid">
                                                         <div class="image-upload">
-                                                            <label for="file-input">
-                                                                <i
-                                                                    class="fa-solid fa-upload icons position-absolute top-0 start-0"></i>
-                                                            </label>
-                                                            <input id="file-input" type="file" />
+                                                            <button class="btn" (click)="selectImage.click()" for="file-input">
+                                                                <i class="fa-solid fa-upload "></i>
+                                                            </button>
+                                                            <input input #selectImage id="file-input" type="file"
+                                                                (change)="onFileSelected($event)" style="display: none;" />
                                                         </div>
+                                                        <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image"
+                                                            class="img-fluid">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-lg-3 col-sm-6 mb-4">
                                                     <div class="position-relative">
-                                                        <img src="https://via.placeholder.com/750x500" alt="Image"
-                                                            class="img-fluid">
                                                         <div class="image-upload">
-                                                            <label for="file-input">
-                                                                <i
-                                                                    class="fa-solid fa-upload icons position-absolute top-0 start-0"></i>
-                                                            </label>
-                                                            <input id="file-input" type="file" />
+                                                            <button class="btn" (click)="selectImage.click()" for="file-input">
+                                                                <i class="fa-solid fa-upload "></i>
+                                                            </button>
+                                                            <input input #selectImage id="file-input" type="file"
+                                                                (change)="onFileSelected($event)" style="display: none;" />
                                                         </div>
+                                                        <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image"
+                                                            class="img-fluid">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-lg-3 col-sm-6 mb-4">
                                                     <div class="position-relative">
-                                                        <img src="https://via.placeholder.com/750x500" alt="Image"
-                                                            class="img-fluid">
                                                         <div class="image-upload">
-                                                            <label for="file-input">
-                                                                <i
-                                                                    class="fa-solid fa-upload icons position-absolute top-0 start-0"></i>
-                                                            </label>
-                                                            <input id="file-input" type="file" />
+                                                            <button class="btn" (click)="selectImage.click()" for="file-input">
+                                                                <i class="fa-solid fa-upload "></i>
+                                                            </button>
+                                                            <input input #selectImage id="file-input" type="file"
+                                                                (change)="onFileSelected($event)" style="display: none;" />
                                                         </div>
+                                                        <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image"
+                                                            class="img-fluid">
                                                     </div>
                                                 </div>
 
                                             </div>
                                         </div> -->
 
-                    <div class="col-md-7">
+                      <div class="col-md-7">
 
                         <div class="row mt-3">
                           <!-- /////////////////Product Name////////////////////// -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <input
-                                type="text" formControlName="name"
-                                class="form-control"
-                                required="required"
-                                pattern="^[a-zA-Z]{4,15}$"
-                              />
+                              <input matInput type="text" formControlName="name" class="form-control" />
                               <span>Product Name</span>
+                              <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class=" text-danger"
+                                role="alert">
+                                <p *ngIf="name?.errors?.['required']">Name is Required <i
+                                    class="fa-solid error fa-circle-exclamation"></i></p>
+                                <p *ngIf="name?.errors?.['pattern']">Invalid Product Name must be between 3 and 15
+                                  characters
+                                  <i class="fa-solid error fa-circle-exclamation"></i>
+                                </p>
+                              </div>
                             </div>
                           </div>
                           <!-- /////////////////Select Category////////////////////// -->
                           <div class="col-md-6">
+                            <p>Category</p>
                             <div class="inputbox mt-3 mr-2">
+<<<<<<< HEAD
                               <select formControlName="category_id"
                                 class="form-select"
                                 aria-label="Default select example"
@@ -134,73 +167,95 @@
                                 <option value="11">T-shirt</option>
                                 <option value="2">Electronics</option>
                                 <option value="1">laptops</option>
+=======
+                              <select formControlName="category_id" class="form-select" name="selectedCategory"
+                                aria-label="Default select example" [(ngModel)]=" selectedCategory" required>
+                                <option value={{Category.id}} *ngFor="let Category of categories"
+                                  [selected]="Category.name == selectedCategory">{{Category.name}}</option>
+>>>>>>> mohamedElsoudy
                               </select>
                             </div>
                           </div>
                           <!-- ///status // -->
                           <div class="col-md-6">
+                            <p>Product Status</p>
                             <div class="inputbox mt-3 mr-2">
-                              <select formControlName="status"
-                                class="form-select"
-                                aria-label="Default select example"
-                              >
-                                <option selected>Stauts</option>
-                                <option value="available">T-available</option>
-                                <option value="inavailable">inavailable</option>
+                              <select formControlName="status" class="form-select" aria-label="Default select example"
+                                [(ngModel)]=" productStates" required>
+                                <!-- <option selected>Stauts</option> -->
+                                <option value="available" [selected]="productStates=='available'">available</option>
+                                <option value="inavailable" [selected]="productStates=='inavailable'">inavailable
+                                </option>
                               </select>
                             </div>
                           </div>
                           <!-- /////////////////Product Price////////////////////// -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <input formControlName="price"
-                                type="number"
-                                class="form-control"
-                                required="required"
-                                pattern="^[0-9]{1,6}$"
-                              />
+                              <input formControlName="price" type="number" class="form-control" />
                               <span>Product Price</span>
+                              <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class=" text-danger"
+                                role="alert">
+                                <p *ngIf="price?.errors?.['required']">Product Price is Required <i
+                                    class="fa-solid error fa-circle-exclamation"></i></p>
+                                <p *ngIf="price?.errors?.['pattern']">Invalid Product price must be between 1 and 10
+                                  digits
+                                  <i class="fa-solid error fa-circle-exclamation"></i>
+                                </p>
+                              </div>
                             </div>
                           </div>
                           <!-- /////////////////Product Quantity////////////////////// -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <input  formControlName="quantity"
-                                type="number"
-                                class="form-control"
-                                required="required"
-                                pattern="^[0-9]{1,6}$"
-                              />
+                              <input formControlName="quantity" type="number" class="form-control" />
                               <span>Product Quantity</span>
+                              <div *ngIf="quantity?.invalid && (quantity?.dirty || quantity?.touched)"
+                                class=" text-danger" role="alert">
+                                <p *ngIf="quantity?.errors?.['required']">Product Quantity is Required <i
+                                    class="fa-solid error fa-circle-exclamation"></i></p>
+                                <p *ngIf="quantity?.errors?.['pattern']">Invalid Product Quantity must be between 1 and
+                                  10 digits
+                                  <i class="fa-solid error fa-circle-exclamation"></i>
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <!-- /////////discount  -->
+                          <!-- //////////////////////discount//////////////////////////  -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <input
-                                type="number" formControlName="discount"
-                                class="form-control"
-                                required="required"
-                                pattern="^[0-9]{1,6}$"
-                              />
+                              <input type="number" formControlName="discount" class="form-control" />
                               <span>Product Discount</span>
+                              <div *ngIf="discount?.invalid && (discount?.dirty || discount?.touched)"
+                                class=" text-danger" role="alert">
+                                <p *ngIf="discount?.errors?.['required']">Product Discount is Required <i
+                                    class="fa-solid error fa-circle-exclamation"></i></p>
+                                <p *ngIf="discount?.errors?.['pattern']">Invalid Product Discount must be between 1 and
+                                  3 digits
+                                  <i class="fa-solid error fa-circle-exclamation"></i>
+                                </p>
+                              </div>
                             </div>
                           </div>
-<!-- ///////////////////rate// -->
+                          <!-- ///////////////////rate//////////////////////////////// -->
                           <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
-                              <input  formControlName="rate"
-                                type="number"
-                                class="form-control"
-                                required="required"
-                                pattern="^[0-9]{1,6}$"
-                              />
+                              <input formControlName="rate" type="number" class="form-control" />
                               <span>Product Rate</span>
+                              <div *ngIf="rate?.invalid && (rate?.dirty || rate?.touched)" class=" text-danger"
+                                role="alert">
+                                <p *ngIf="rate?.errors?.['required']">Product Rate is Required <i
+                                    class="fa-solid error fa-circle-exclamation"></i></p>
+                                <p *ngIf="rate?.errors?.['pattern']">Invalid Product Rate must be between 1 to 5
+                                  <i class="fa-solid error fa-circle-exclamation"></i>
+                                </p>
+                              </div>
                             </div>
                           </div>
                           <!-- /////////////////DESCRIPTION////////////////////// -->
                           <div class="col-md-12">
                             <div class="inputbox mt-3 mr-2">
+<<<<<<< HEAD
                               <textarea formControlName="description"
                                 type="text"
                                 class="form-control"
@@ -208,20 +263,31 @@
                                 pattern="^[a-zA-Z]{10,100}$"
                                 rows="4"
                               ></textarea>
+=======
+                              <textarea type="text" class="form-control" formControlName="description"
+                                rows="4"></textarea>
+>>>>>>> mohamedElsoudy
                               <span>Product Description</span>
+                              <div *ngIf="description?.invalid && (description?.dirty || description?.touched)"
+                                class=" text-danger" role="alert">
+                                <p *ngIf="description?.errors?.['required']">Product Description is Required <i
+                                    class="fa-solid error fa-circle-exclamation"></i></p>
+                                <p *ngIf="description?.errors?.['pattern']">Invalid Product Description must be between
+                                  5 and 100 digits
+                                  <i class="fa-solid error fa-circle-exclamation"></i>
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="div float">
-                          <button class="btn btn-primary" type="submit">  Add product</button>
+                          <button class="btn btn-primary" type="submit">{{buttonText}}</button>
                         </div>
-
+                      </div>
                     </div>
                   </div>
-
                 </div>
-              </div>
-            </form>
+              </form>
             </div>
           </div>
         </div>
@@ -229,3 +295,46 @@
     </div>
   </div>
 </section>
+
+<!-- 
+<div *ngIf="imageUrl">
+  <img [src]="imageUrl" alt="Uploaded Image">
+</div> -->
+
+
+
+
+<!-- <input type="file" (change)="onFileSelected($event)" style="display: none;">
+<i class="fa-solid fa-upload icons position-absolute top-0 start-0" ></i>
+<img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image" width="50px" height="50px"> -->
+
+<!-- <button class="btn" (click)="selectImage.click()" for="file-input">
+    <i class="fa fa-file"></i>
+</button> -->
+<!-- <input #selectImage id="file-input" type="file" (change)="onFileSelected($event)" style="display: none;">
+<img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded image" width="50px" height="80px"> -->
+
+
+
+<!-- <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+  <p>Drag and drop images here</p>
+  <input #fileInput type="file" hidden (change)="onFileSelected($event)">
+</div>
+<div *ngIf="imageUrl">
+  <img [src]="imageUrl" alt="Uploaded Image">
+</div> -->
+
+<!-- <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+  <p>Drag and drop images here or click to select files</p>
+  <input #fileInput type="file" hidden (change)="onFileSelected($event)" multiple>
+</div>
+<div *ngIf="imageUrls && imageUrls.length > 0">
+  <div class="uploaded-image-container">
+    <img class="uploaded-image uploaded-main-image" [src]="imageUrls[0]" alt="Uploaded Image">
+  </div>
+  <div class="uploaded-image-container">
+    <ng-container *ngFor="let imageUrl of imageUrls.slice(1)">
+      <img class="uploaded-image uploaded-thumbnail" [src]="imageUrl" alt="Uploaded Thumbnail">
+    </ng-container>
+  </div>
+</div> -->

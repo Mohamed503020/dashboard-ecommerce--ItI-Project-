@@ -16,6 +16,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,68 +1,29 @@
-<section class="gradient-custom">
+<!-- <section class="gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div
-          class="card shadow-2-strong card-registration"
-          style="border-radius: 15px"
-        >
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
           <div class="card-body p-4">
             <h3 class="mb-4 pb-2 pb-md-0">Add New User</h3>
             <div class="input-group row col-6 mb-4">
-              <label class="text d-flex align-items-center col-4" for=""
-                >Add Image</label
-              >
-              <input
-                class="form-control col-8"
-                type="file"
-                id="formFileDisabled"
-              />
+
             </div>
             <form #userForm="ngForm" (ngSubmit)="(userForm.value)">
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <label class="form-label" for="firstName">First Name</label>
-                    <input
-                      type="text"
-                      id="Name"
-                      class="form-control form-control-lg"
-                      placeholder="Mohamed"
-                      name="firstName"
-                      ngModel
-                      required
-                      #fname="ngModel"
-                      pattern="^[a-zA-Z]{3,}( {1,2}[a-zA-Z]{3,}){0,}$"
-                    />
+                  <div class="form-outline"> -->
+<!-- ///////////////// -->
+<!-- <label for="email">Image</label>
+                    <input type="file" class="form-control" name="image" required>
+                    <label class="form-label" for="firstName">Name</label>
+                    <input type="text" id="Name" class="form-control form-control-lg" placeholder="Mohamed"
+                      name="firstName" ngModel required #fname="ngModel"
+                      pattern="^[a-zA-Z]{3,}( {1,2}[a-zA-Z]{3,}){0,}$" />
                     <div *ngIf="fname.touched">
                       <p *ngIf="fname.errors?.['required']" style="color: red">
-                        First Name is a required field!
+                      Name is a required field!
                       </p>
                       <p *ngIf="fname.errors?.['pattern']" style="color: red">
-                        Enter a name with at least three letters !
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <label class="form-label" for="lastName">Last Name</label>
-                    <input
-                      placeholder="Ibrahim"
-                      type="text"
-                      id="lastName"
-                      class="form-control form-control-lg"
-                      ngModel
-                      required
-                      #lname="ngModel"
-                      pattern="^[a-zA-Z]{3,}( {1,2}[a-zA-Z]{3,}){0,}$"
-                      name="lastName"
-                    />
-                    <div *ngIf="lname.touched">
-                      <p *ngIf="lname.errors?.['required']" style="color: red">
-                        Last Name is a required field!
-                      </p>
-                      <p *ngIf="lname.errors?.['pattern']" style="color: red">
                         Enter a name with at least three letters !
                       </p>
                     </div>
@@ -74,17 +35,9 @@
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <label class="form-label" for="firstName">User Name</label>
-                    <input
-                      placeholder="Mohamed Ibrahim"
-                      type="text"
-                      id="firstName"
-                      class="form-control form-control-lg"
-                      required
-                      ngModel
-                      #user="ngModel"
-                      name="userName"
-                      pattern="^[a-zA-Z]{3,}( {1,2}[a-zA-Z]{3,}){0,}$"
-                    />
+                    <input placeholder="Mohamed Ibrahim" type="text" id="firstName" class="form-control form-control-lg"
+                      required ngModel #user="ngModel" name="userName"
+                      pattern="^[a-zA-Z]{3,}( {1,2}[a-zA-Z]{3,}){0,}$" />
                     <div *ngIf="user.touched">
                       <p *ngIf="user.errors?.['required']" style="color: red">
                         User Name is a required field!
@@ -98,17 +51,9 @@
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <label class="form-label" for="lastName">Email</label>
-                    <input
-                      placeholder="mo100200h@gmail.com"
-                      type="email"
-                      id="email"
-                      class="form-control form-control-lg"
-                      required
-                      ngModel
-                      #mail="ngModel"
-                      name="Email"
-                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    />
+                    <input placeholder="mo100200h@gmail.com" type="email" id="email"
+                      class="form-control form-control-lg" required ngModel #mail="ngModel" name="Email"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                     <div *ngIf="mail.touched">
                       <p *ngIf="mail.errors?.['required']" style="color: red">
                         Email is a required field !
@@ -124,20 +69,9 @@
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
-                    <label class="form-label" for="emailAddress"
-                      >Birthday</label
-                    >
-                    <input
-                      placeholder="29/7/1999"
-                      type="text"
-                      id="Birthday"
-                      class="form-control form-control-lg"
-                      required
-                      name="birth"
-                      ngModel
-                      #d="ngModel"
-                      pattern="^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$"
-                    />
+                    <label class="form-label" for="emailAddress">Birthday</label>
+                    <input placeholder="29/7/1999" type="text" id="Birthday" class="form-control form-control-lg"
+                      required name="birth" ngModel #d="ngModel" pattern="^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$" />
                     <div *ngIf="d.touched">
                       <p *ngIf="d.errors?.['required']" style="color: red">
                         Birthday Date is a required field !
@@ -151,17 +85,9 @@
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
                     <label class="form-label" for="phoneNumber">Address</label>
-                    <input
-                      placeholder="Address here"
-                      type="text"
-                      id="Address"
-                      class="form-control form-control-lg"
-                      required
-                      ngModel
-                      #add="ngModel"
-                      name="address"
-                      pattern="^([0-9]+)\s+([a-zA-Z]+\s)*([a-zA-Z]+)\s*(#\s*[0-9]+)?$"
-                    />
+                    <input placeholder="Address here" type="text" id="Address" class="form-control form-control-lg"
+                      required ngModel #add="ngModel" name="address"
+                      pattern="^([0-9]+)\s+([a-zA-Z]+\s)*([a-zA-Z]+)\s*(#\s*[0-9]+)?$" />
                     <div *ngIf="add.touched">
                       <p *ngIf="add.errors?.['required']" style="color: red">
                         Address is a required field !
@@ -175,12 +101,8 @@
               </div>
 
               <div class="pt-2 d-flex flex-row-reverse">
-                <input
-                  class="btn btn-primary btn-lg"
-                  type="submit"
-                  [disabled]="userForm.invalid"
-                  value="Save Contact"
-                />
+                <input class="btn btn-primary btn-lg" type="submit" [disabled]="userForm.invalid"
+                  value="Save Contact" />
               </div>
             </form>
           </div>
@@ -188,4 +110,98 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- <h1 class="d-flex m-3">Update User</h1>
+
+<div class="container   w-50 mx-auto shadow bg-light p-3">
+  <h1 class="m-3">Update user</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="form-group m-3">
+      <label for="name" >Name</label>
+      <input [(ngModel)]="user.name" type="text" formControlName="name" id="name" class="form-control">
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+        <div *ngIf="name?.errors?.['required']">Name is required.</div>
+        <div *ngIf="name?.errors?.['minlength']">Name must be at least {{ name?.errors?.['minlength'].requiredLength }} characters long.</div>
+        <div *ngIf="name?.errors?.['maxlength']">Name cannot be more than {{ name?.errors?.['maxlength'].requiredLength }} characters long.</div>
+      </div>
+    </div>
+    <div class="form-group m-3">
+      <label for="email">Email</label>
+      <input [(ngModel)]="user.email" type="email" name="email"  formControlName="email" id="email" class="form-control">
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+        <div *ngIf="email?.errors?.['required']">Email is required.</div>
+        <div *ngIf="email?.errors?.['email']">Email must be a valid email address.</div>
+      </div>
+    </div>
+    <div class="form-group m-3">
+      <label for="gender">Gender</label>
+      <select formControlName="gender" [(ngModel)]="user.gender"  class="form-control" name="gender" >
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+        <div *ngIf="gender?.errors?.['required']">Gender? is required.</div>
+      </div>
+    </div>
+    <div class="float-end">
+      <button type="submit" [disabled]="!registerForm.valid" (click)="update()" class="btn btn-info mx-auto p-3 ">Update User</button>
+    </div>
+  </form>
+</div> -->
+
+
+<button mat-icon-button style="float :right; margin: 5px;" matDialogClose>
+  <mat-icon>close</mat-icon>
+</button>
+<mat-dialog-content>
+  <header>
+    <h1>Update User</h1>
+  </header>
+</mat-dialog-content>
+
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="updateuser()" enctype="multipart/form-data">
+    <div class="form-group m-3">
+      <label for="name">Name</label>
+      <input [(ngModel)]="user.name" type="text" formControlName="name" id="name" class="form-control">
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-danger mt-1">
+        <p *ngIf="name?.errors?.['required']">Name is required <i class="fa-solid error fa-circle-exclamation"></i></p>
+        <p *ngIf="name?.errors?.['pattern']">Name must be between 3 and 15 characters <i
+            class="fa-solid error fa-circle-exclamation"></i></p>
+      </div>
+    </div>
+    <div class="form-group m-3">
+      <label for="email">Email</label>
+      <input [(ngModel)]="user.email" type="email" name="email" formControlName="email" id="email" class="form-control">
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger mt-1">
+        <p *ngIf="email?.errors?.['required']">Email is required <i class="fa-solid error fa-circle-exclamation"></i></p>
+        <p *ngIf="email?.errors?.['pattern']">Please enter a valid email address ending with '.com' <i
+            class="fa-solid error fa-circle-exclamation"></i></p>
+      </div>
+    </div>
+    <div class="form-group m-3">
+      <label for="gender">Gender</label>
+      <select formControlName="gender" [(ngModel)]="user.gender" class="form-control" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+        <div *ngIf="gender?.errors?.['required']">Gender? is required.</div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+      <button class="btn btn-danger" type="button" matDialogClose>Cancle</button>
+      <button class="btn save me-md-2" type="submit" (click)="updateuser()" matDialogClose>update</button>
+    </div>
+  </form>
+</div>

@@ -1,5 +1,5 @@
 <!-- <p>add-category works!</p> -->
-<button mat-icon-button style="float :right; margin: 5px;"matDialogClose>
+<button mat-icon-button style="float :right; margin: 5px;" matDialogClose>
     <mat-icon>close</mat-icon>
 </button>
 <mat-dialog-content>
@@ -9,15 +9,28 @@
 </mat-dialog-content>
 
 <div class="container">
-    <form>
+    <form #myForm="ngForm">
         <div class="mb-3">
             <label class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="categoryName" >
-          </div>
+            <input type="text" [(ngModel)]="category.name" name="name" ngModel required class="form-control"
+                id="categoryName" pattern="^(?=.{4,15}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$">
+        </div>
 
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+        <!-- <label class="form-label">Category Name</label>
+        <input matInput type="text" formControlName="category.name"[(ngModel)]="category.name" name="name" class="form-control" />
+        <div *ngIf="category.name?.invalid && (category.name?.dirty || category.name?.touched)" class=" text-danger"
+          role="alert">
+          <p *ngIf="category.name?.errors?.['required']">Category is Required <i
+              class="fa-solid error fa-circle-exclamation"></i></p>
+          <p *ngIf="category.name?.errors?.['pattern']">Invalid category Name must be between 3 and 15 digits
+            characters
+            <i class="fa-solid error fa-circle-exclamation"></i>
+          </p>
+        </div> -->
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
             <button class="btn btn-danger" type="button" matDialogClose>Cancle</button>
-            <button class="btn save me-md-2" type="button">Save</button>
-          </div>
-      </form>
+            <button class="btn save me-md-2" type="submit" (click)="saveCategory()" matDialogClose>Save</button>
+        </div>
+    </form>
 </div>

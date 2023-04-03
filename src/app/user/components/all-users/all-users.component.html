@@ -8,9 +8,9 @@
       <div class="col-6 d-flex justify-content-start">
         <h2>Users</h2>
       </div>
-      <div class="col-6 d-flex justify-content-end">
+      <!-- <div class="col-6 d-flex justify-content-end">
         <button class="Add">Add User</button>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -20,10 +20,10 @@
         <label for="searchType">Search By:</label>
         <select class="form-control" id="searchType" [(ngModel)]="searchType">
           <option selected disabled>Search by</option>
-          <option value="name">name</option>
+          <option value="name">Name</option>
           <option value="Email">Email</option>
-          <option value="phone">phone</option>
-          <option value="joinOn">join on</option>
+          <option value="gender">Gender</option>
+          <!-- <option value="joinOn">join on</option> -->
         </select>
       </div>
       <div class="col-md-4 mb-3">
@@ -41,8 +41,9 @@
           <th>User Image</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Phone</th>
-          <th>Join On</th>
+          <th>Gender</th>
+          <!-- <th>Phone</th>
+          <th>Join On</th> -->
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -52,10 +53,12 @@
           <td><img [src]="item.image" alt=""></td>
           <td>{{ item.name }}</td>
           <td>{{item.email}}</td>
-          <td>{{item.phone}}</td>
-          <td>{{item.joinOn}}</td>
-          <td><i class="fas fa-pen bg-info p-2"></i></td>
-          <td><i class="fas fa-trash bg-danger p-2"></i></td>
+          <td>{{item.gender}}</td>
+          <!-- <td>{{item.updated_at}}</td>
+          <td>{{item.created_at}}</td> -->
+          <!-- [routerLink]="['/dashboard/users/add',item.id]" -->
+          <td><i class="fas fa-pen bg-info p-2" (click)="openUpdateDialog(item.id)" ></i></td>
+          <td (click)="deleteUser(item.id!)"><i class="fas fa-trash bg-danger p-2"></i></td>
         </tr>
       </tbody>
     </table>

@@ -1,12 +1,21 @@
 import { Component } from '@angular/core';
-interface Item {
+import { ActivatedRoute, Router } from '@angular/router';
+import { AllOrdersService } from '../allOrders.service';
+interface Order {
   id:number;
-  customer: string;
-  email: string;
-  price: number;
+  name: string;
+  total_price: number;
   item: number;
-  status: string;
-  date: string;
+  payment_status: number;
+  created_at: string;
+  user:{
+    id:number,
+    email:string,
+  };
+ 
+}
+
+ interface OrderStatus {
  
 }
 @Component({
@@ -15,100 +24,8 @@ interface Item {
   styleUrls: ['./all-orders.component.css']
 })
 export class AllOrdersComponent {
-  items: Item[] = [
-    {
-      id:1,
-      customer: 'ahmed',
-      email: 'ahmed@gmail.com',
-      price: 10.99,
-      item: 2, 
-      status: 'cancle',
-      date: '2023-03-18',
-    },
-    {
-      id:2,
-      customer: 'mohammmed',
-      email: 'mohammmed@gmail.com',
-      price: 100,
-      item: 3, 
-      status: 'delivered',
-      date: '2020-03-18',
-    },
-    {
-      id:3,
-      customer: 'ali',
-      email: 'ali@gmail.com',
-      price: 5,
-      item: 1, 
-      status: 'processing',
-      date: '2025-03-18',
-    },
-    {
-      id:4,
-      customer: 'sofo',
-      email: 'sofo@gmail.com',
-      price: 600,
-      item: 8, 
-      status: 'delivered',
-      date: '2023-03-18',
-    },
-    {
-      id:5,
-      customer: 'mar',
-      email: 'mar@gmail.com',
-      price: 50,
-      item: 9, 
-      status: 'cancle',
-      date: '2022-03-18',
-    },
-    {
-      id:6,
-      customer: 'aml',
-      email: 'aml@gmail.com',
-      price: 300,
-      item: 2, 
-      status: 'delivered',
-      date: '2023-03-18',
-    },
-    {
-      id:7,
-      customer: 'gege',
-      email: 'gege@gmail.com',
-      price: 16,
-      item: 2, 
-      status: 'processing',
-      date: '2021-03-18',
-    },
-    {
-      id:8,
-      customer: 'koko',
-      email: 'koko@gmail.com',
-      price: 108,
-      item: 6, 
-      status: 'cancle',
-      date: '2023-03-18',
-    },
-    {
-      id:9,
-      customer: 'lolo',
-      email: 'lolo@gmail.com',
-      price: 1102,
-      item: 5, 
-      status: 'processing',
-      date: '2023-03-18',
-    },
-    {
-      id:10,
-      customer: 'meme',
-      email: 'meme@gmail.com',
-      price: 10.99,
-      item: 2, 
-      status: 'delivered',
-      date: '2023-03-18',
-    },
-    
-  ];
-
+  orders: Order[] = [];
+  
   pageSize = 5;
   startIndex = 0;
   endIndex = this.pageSize;
@@ -116,12 +33,42 @@ export class AllOrdersComponent {
   pageNumbers: number[] = [];
   searchType = 'item';
   searchTerm = '';
-  filteredItems: Item[] = this.items;
+  filteredItems: Order[] = this.orders;
 
-  ngOnInit() {
-    this.calculatePageNumbers();
+  constructor(private orderServ:AllOrdersService,private route: ActivatedRoute, private router: Router){
+
   }
 
+   getOrders(){
+    this.orderServ.getAllOrders().subscribe({
+      next:(res)=>{
+        this.orders=res;
+        this.filteredItems=this.orders;
+        console.log(this.orders);
+        
+  
+      }
+    })
+   }
+  ngOnInit() {
+    // console.log(10);
+    
+    this.calculatePageNumbers();
+    this.getOrders();
+    
+  }
+  changeStatus(id:number,status:number){
+      this.orderServ.changeOrderStatus(id,+status).subscribe({
+        next:(data)=>{
+          // this.router.navigate(['/dashboard/orders']);
+          console.log(typeof status);
+          // this.router.navigate([this.route.snapshot.url.join('/dashboard/orders')])
+          this.getOrders();
+
+        }
+      })
+       
+  }
   calculatePageNumbers() {
     const totalPages = Math.ceil(this.filteredItems.length / this.pageSize);
     this.pageNumbers = Array(totalPages).fill(0).map((_, i) => i + 1);
@@ -147,37 +94,62 @@ export class AllOrdersComponent {
   }
 
   search() {
-    this.filteredItems = this.items.filter(item => {
+    this.filteredItems = this.orders.filter(item => {
       const searchTermLower = this.searchTerm.toLowerCase();
       
         if (this.searchType=='id'){
           return String(item.id).toLowerCase().includes(searchTermLower)
         }
         if(this.searchType=='price less than'){
-          return item.price<= +this.searchTerm;
+          return item.total_price<= +this.searchTerm;
         }
         if(this.searchType=='price bigger than'){
-          return item.price>= +this.searchTerm;
+          return item.total_price>= +this.searchTerm;
         }
         if (this.searchType=='customer'){
-          return item.customer.toLowerCase().includes(searchTermLower)
+          return item.name.toLowerCase().includes(searchTermLower)
         }
         if (this.searchType=='email'){
-          return item.email.toLowerCase().includes(searchTermLower)
+          return item.user.email.toLowerCase().includes(searchTermLower)
         }
-        if (this.searchType=='status'){
-          return item.status.toLowerCase().includes(searchTermLower)
-        }
+      
         if (this.searchType=='item'){
           return String(item.item).toLowerCase().includes(searchTermLower)
         }
         
         return this.searchType === 'date'?
-        item.date.includes(searchTermLower):
-         item.date== this.searchTerm;
+        item.created_at.includes(searchTermLower):
+         item.created_at== this.searchTerm;
     });
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
-  } 
+  }
+  
+  
+  // openUpdateDialog(id:any) {
+  //   console.log(id)
+  //     this.http.get(`http://localhost:8000/api/showUser/${id}`).subscribe((data: any) => {
+  //       // Pass the fetched data to the UpdateCategoryComponent dialog.
+  //       const dialogRef = this.dialog.open(AddUserComponent, {
+  //         width: '500px',
+  //         height: '400px',
+  //         data: data
+  //       });
+    
+  //       dialogRef.afterClosed().subscribe(result => {
+          
+  //           // Handle the returned data here.
+  //           console.log(`Returned data: ${JSON.stringify(result)}`);
+  //           // console.log(`Dialog result: ${result}`);
+  //           this.getAllUsers();
+            
+          
+  //       });
+  //     });
+    
+  //     this.getAllUsers();
+    
+  //   }
+
 }

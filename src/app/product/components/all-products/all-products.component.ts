@@ -1,15 +1,24 @@
-import { ProductService } from './../../services/product.service';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../services/product.service';
+import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Component,OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UpdateProductComponent } from '../update-product/update-product.component';
+
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.css']
+  styleUrls: ['./all-products.component.css'],
 })
 export class AllProductsComponent implements OnInit {
-
-  items: any[]=[]
-
+  apiProduct: any[] = [];
+  constructor(
+    private productService: ProductService,
+    public dialog: MatDialog,
+    private router: Router,
+    private http: HttpClient
+  ) {}
   pageSize = 6;
   startIndex = 0;
   endIndex = this.pageSize;
@@ -17,18 +26,20 @@ export class AllProductsComponent implements OnInit {
   pageNumbers: number[] = [];
   searchType = 'item';
   searchTerm = '';
-  filteredItem!:any[]
-constructor(private router:Router,private ProductServ:ProductService){}
+  filteredItems: any[] = this.apiProduct;
+
   ngOnInit() {
+    this.getAllProduct();
     this.calculatePageNumbers();
-    this.getallproducs()
+
 
   }
 
   calculatePageNumbers() {
-    const totalPages = Math.ceil(this.filteredItem!.length / this.pageSize);
-    this.pageNumbers = Array(totalPages).fill(0).map((_, i) => i + 1);
-
+    const totalPages = Math.ceil(this.filteredItems.length / this.pageSize);
+    this.pageNumbers = Array(totalPages)
+      .fill(0)
+      .map((_, i) => i + 1);
   }
 
   goToPage(pageNumber: number) {
@@ -50,43 +61,62 @@ constructor(private router:Router,private ProductServ:ProductService){}
   }
 
   search() {
-    this.filteredItem = this.items.filter(item => {
+    this.filteredItems = this.apiProduct.filter((item) => {
       const searchTermLower = this.searchTerm.toLowerCase();
 
-        if (this.searchType=='name'){
-          return item.name.toLowerCase().includes(searchTermLower)
-        }
-        if(this.searchType=='price less than'){
-          return item.price<= +this.searchTerm;
-        }
-        if(this.searchType=='price bigger than'){
-          return item.price>= +this.searchTerm;
-        }
-        if(this.searchType=='offer'){
-          return item.offer*100 == +this.searchTerm;
-        }
-        return this.searchType === 'date'?
-        item.date.includes(searchTermLower):
-         item.date== this.searchTerm;
+      if (this.searchType == 'name') {
+        return item.name.toLowerCase().includes(searchTermLower);
+      }
+      if (this.searchType == 'price less than') {
+        return item.price <= +this.searchTerm;
+      }
+      if (this.searchType == 'price bigger than') {
+        return item.price >= +this.searchTerm;
+      }
+      return this.searchType === 'discount'
+        ? item.discount.includes(searchTermLower)
+        : item.rate == this.searchTerm;
     });
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
   }
-getallproducs(){
-this.ProductServ.geTAllproducts().subscribe({
-  next:(item)=>{this.items=item;console.log(item); this.filteredItem=this.items},
-  error:error=>{alert(error.message)}
-})
-}
 
-  addproduct(){
-    this.router.navigate(['dashboard/products/add'] );
+  getAllProduct() {
+    this.productService.getAllProduct().subscribe({
+      next: (res) => {
+        this.apiProduct = res;
+        this.filteredItems = this.apiProduct;
+        console.log(res);
+      },
+    });
   }
 
-  updateProduct(product:any){
-    this.router.navigate(['main/products/add'], { queryParams: { product: product} });
+  deleteProduct(id: any) {
+    this.productService.deleteProduct(id).subscribe({
+      next: (data) => {
+        this.getAllProduct();
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+        this.getAllProduct();
+      },
+    });
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your product has been delete',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    this.getAllProduct();
+  }
+
+  updateProduct(id: number) {
+    this.router.navigate(['/dashboard/products/add'], {
+      queryParams: { id: id },
+    });
   }
 }
-
-
