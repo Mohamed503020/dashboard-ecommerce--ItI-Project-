@@ -1,106 +1,14 @@
+import { ProductService } from './../../services/product.service';
+import { Router } from '@angular/router';
 import { Component,OnInit } from '@angular/core';
-
-interface Item {
-  image: URL;
-  name: string;
-  price: number;
-  offer: number;
-  date: string;
- 
-}
-
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.css']
 })
 export class AllProductsComponent implements OnInit {
-  items: Item[] = [
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, 
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2021-04-05',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-02-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, 
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2023-03-17',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0,
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2023-03-17',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 1',
-      price: 10.99,
-      offer: 0.2, 
-      date: '2023-03-18',
-    },
-    {
-      image: new URL('https://fakeimg.pl/300/'),
-      name: 'Item 2',
-      price: 24.99,
-      offer: 0, 
-      date: '2023-03-19',
-    },
-    {
-      image: new URL('https://m.media-amazon.com/images/I/51eVl5NGIjL._AC_SX679_.jpg'),
-      name: 'Item 3',
-      price: 5.49,
-      offer: 0.1, 
-      date: '2022-03-17',
-    },
-  ];
+
+  items: any[]=[]
 
   pageSize = 6;
   startIndex = 0;
@@ -109,16 +17,18 @@ export class AllProductsComponent implements OnInit {
   pageNumbers: number[] = [];
   searchType = 'item';
   searchTerm = '';
-  filteredItems: Item[] = this.items;
-
+  filteredItem!:any[]
+constructor(private router:Router,private ProductServ:ProductService){}
   ngOnInit() {
     this.calculatePageNumbers();
+    this.getallproducs()
+
   }
 
   calculatePageNumbers() {
-    const totalPages = Math.ceil(this.filteredItems.length / this.pageSize);
+    const totalPages = Math.ceil(this.filteredItem!.length / this.pageSize);
     this.pageNumbers = Array(totalPages).fill(0).map((_, i) => i + 1);
-    
+
   }
 
   goToPage(pageNumber: number) {
@@ -140,9 +50,9 @@ export class AllProductsComponent implements OnInit {
   }
 
   search() {
-    this.filteredItems = this.items.filter(item => {
+    this.filteredItem = this.items.filter(item => {
       const searchTermLower = this.searchTerm.toLowerCase();
-      
+
         if (this.searchType=='name'){
           return item.name.toLowerCase().includes(searchTermLower)
         }
@@ -162,7 +72,21 @@ export class AllProductsComponent implements OnInit {
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
-  } 
+  }
+getallproducs(){
+this.ProductServ.geTAllproducts().subscribe({
+  next:(item)=>{this.items=item;console.log(item); this.filteredItem=this.items},
+  error:error=>{alert(error.message)}
+})
+}
+
+  addproduct(){
+    this.router.navigate(['dashboard/products/add'] );
+  }
+
+  updateProduct(product:any){
+    this.router.navigate(['main/products/add'], { queryParams: { product: product} });
+  }
 }
 
 
