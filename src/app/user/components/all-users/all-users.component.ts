@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../Models/user';
 import { UserService } from '../../Service/user.service';
 import Swal from 'sweetalert2';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
 
 // interface user {
 //   image: URL;
@@ -124,7 +123,12 @@ export class AllUsersComponent implements OnInit {
   // ]
   apiUser: User[] = [];
 
-  constructor(private userService: UserService,public dialog: MatDialog,private router: Router,private http:HttpClient) {}
+  constructor(
+    private userService: UserService,
+    public dialog: MatDialog,
+    private router: Router,
+    private http: HttpClient
+  ) {}
   pageSize = 5;
   startIndex = 0;
   endIndex = this.pageSize;
@@ -206,61 +210,55 @@ export class AllUsersComponent implements OnInit {
     this.calculatePageNumbers();
     this.goToPage(1);
   }
-  async deleteUser(id: number) {
-    if (await Swal.fire(
-      'Confirm the deletion?',
-      'Are you sure you want to delete this user?',
-      'question'
-    ) ) {
-      this.userService.deleteUser(id).subscribe({
-        next:(data)=>{
-          this.getAllUsers();
-        }
-      });
-      
-      Swal.fire({
-        // position: 'top-end',
-        icon: 'success',
-        title: 'User has been delete',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
+  deleteUser(id: number) {
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.getAllUsers();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'User Deleted Successfully ',
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        Swal.fire('Oops...', 'Something went wrong!', 'error');
+      },
+    });
   }
 
-//   openDialog() {
-//     const dialogRef = this.dialog.open(AddUserComponent, {
-//       width:'500px', height:'400px'
-//     });
-//     dialogRef.afterClosed().subscribe(result => {
-//       console.log(`Dialog result: ${result}`);
-//       this.getAllUsers();
-//     });
-// }
+  //   openDialog() {
+  //     const dialogRef = this.dialog.open(AddUserComponent, {
+  //       width:'500px', height:'400px'
+  //     });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log(`Dialog result: ${result}`);
+  //       this.getAllUsers();
+  //     });
+  // }
 
-openUpdateDialog(id:any) {
-console.log(id)
-  this.http.get(`http://localhost:8000/api/showUser/${id}`).subscribe((data: any) => {
-    // Pass the fetched data to the UpdateCategoryComponent dialog.
-    const dialogRef = this.dialog.open(AddUserComponent, {
-      width: '500px',
-      height: '400px',
-      data: data
-    });
+  openUpdateDialog(id: any) {
+    console.log(id);
+    this.http
+      .get(`http://localhost:8000/api/showUser/${id}`)
+      .subscribe((data: any) => {
+        // Pass the fetched data to the UpdateCategoryComponent dialog.
+        const dialogRef = this.dialog.open(AddUserComponent, {
+          width: '500px',
+          height: '400px',
+          data: data,
+        });
 
-    dialogRef.afterClosed().subscribe(result => {
-      
-        // Handle the returned data here.
-        console.log(`Returned data: ${JSON.stringify(result)}`);
-        // console.log(`Dialog result: ${result}`);
-        this.getAllUsers();
-        
-      
-    });
-  });
+        dialogRef.afterClosed().subscribe((result) => {
+          // Handle the returned data here.
+          console.log(`Returned data: ${JSON.stringify(result)}`);
+          // console.log(`Dialog result: ${result}`);
+          this.getAllUsers();
+        });
+      });
 
-  this.getAllUsers();
-
-}
-
+    this.getAllUsers();
+  }
 }

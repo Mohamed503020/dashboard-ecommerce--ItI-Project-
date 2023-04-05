@@ -28,7 +28,8 @@ export class ProductDetailsComponent implements OnInit {
 
      getProduct(){
       this.subsucription= this._ProductService.getSingleProduct(this.productId).subscribe({
-         next:data=>{this.product=data;
+         next:data=>{
+          this.product=data;
            this.ImgUrl=data.images[1];
    
          },

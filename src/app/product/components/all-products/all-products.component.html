@@ -44,7 +44,7 @@
           <th>Name</th>
           <th>Price</th>
           <th>Discount</th>
-          <th>Rate</th>
+          <!-- <th>Rate</th> -->
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -55,7 +55,7 @@
           <td>{{ item.name }}</td>
           <td>{{item.price |currency}}</td>
           <td>{{item.discount | percent }}</td>
-          <td>{{item.rate}}</td>
+          <!-- <td>{{item.rate}}</td> -->
           <td><i class="fas fa-pen bg-info p-2" (click)="updateProduct(item.id)"></i></td>
           <td  (click)="deleteProduct(item.id!)"><i class="fas fa-trash bg-danger p-2"></i></td>
         </tr>

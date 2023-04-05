@@ -47,13 +47,14 @@ export class AddProductComponent implements OnInit {
     // this.getProductId();
 
     this.productForm = this.formBuilder.group({
-      name: ['',[Validators.required,Validators.pattern("^(?=.{1,20}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
+      name: ['',[Validators.required,Validators.pattern("^(?=.{1,25}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
       category_id: ['',[Validators.required, Validators.pattern("^[0-9]{1,10}$")]],
       price: ['', [Validators.required, Validators.pattern("^[0-9]{2,10}$")]],
       quantity: ['',[Validators.required, Validators.pattern("^[0-9]{1,10}$")]],
       discount: ['', [Validators.required,Validators.pattern("^[0-9]{1,3}$")]],
-      rate: ['',[Validators.required, Validators.pattern("^[0-5]{1}$")]],
-      description: ['', [Validators.required,Validators.pattern("^(?=.{1,200}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
+      // rate: ['',[Validators.required, Validators.pattern("^[0-5]{1}$")]],
+      // description: ['', [Validators.required,Validators.pattern("^(?=.{1,400}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
+      description: ['', [Validators.required]],
       status: ['', Validators.required],
       image: [[], Validators.required],
     });
@@ -80,32 +81,69 @@ export class AddProductComponent implements OnInit {
 
 //  *************************new*********************************** 
 
+  // onDrop(event: any) {
+  //   event.preventDefault();
+  //   this.uploadImages(event.dataTransfer.files);
+  // }
+
+  // onDragOver(event: any) {
+  //   event.preventDefault();
+  // }
+
+  // onDragLeave(event: any) {
+  //   event.preventDefault();
+  // }
+
+  // onFileSelected(event: any) {
+  //   this.uploadImages(event.target.files);
+  // }
+
+  // uploadImages(files: FileList) {
+  //   for (let i = 0; i < files.length; i++) {
+  //     const file = files[i];
+  //     const reader = new FileReader();
+
+  //     reader.onload = (event: any) => {
+  //       this.imageUrls.push(event.target.result);
+  //     };
+
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
+
+
+
   onDrop(event: any) {
     event.preventDefault();
     this.uploadImages(event.dataTransfer.files);
   }
-
+  
   onDragOver(event: any) {
     event.preventDefault();
   }
-
+  
   onDragLeave(event: any) {
     event.preventDefault();
   }
-
+  
+  deleteImage(index: number) {
+    this.imageUrls.splice(index, 1);
+  }
+  
   onFileSelected(event: any) {
+    this.imageUrls = [];
     this.uploadImages(event.target.files);
   }
-
   uploadImages(files: FileList) {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
-
+  
       reader.onload = (event: any) => {
         this.imageUrls.push(event.target.result);
       };
-
+  
       reader.readAsDataURL(file);
     }
   }
@@ -145,7 +183,7 @@ export class AddProductComponent implements OnInit {
     formData.append('price', this.productForm.get('price').value);
     formData.append('quantity', this.productForm.get('discount').value);
     formData.append('discount', this.productForm.get('discount').value);
-    formData.append('rate', this.productForm.get('rate').value);
+    // formData.append('rate', this.productForm.get('rate').value);
     formData.append('description', this.productForm.get('description').value);
     formData.append('status', this.productForm.get('status').value);
     formData.append('image', this.productForm.get('images')?.value);
@@ -171,7 +209,13 @@ export class AddProductComponent implements OnInit {
       this._ProductService.createProduct(formData).subscribe({
         next: (data) => {
           console.log(data);
-          alert('success');
+          Swal.fire({
+            // position: 'top-end',
+            icon: 'success',
+            title: 'Product Added Successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
           this.productForm.reset();
           this.imageUrls=[];
         },
@@ -192,7 +236,7 @@ export class AddProductComponent implements OnInit {
         this.productForm.get('price').setValue(this.product.price);
         this.productForm.get('quantity').setValue(this.product.quantity);
         this.productForm.get('discount').setValue(this.product.discount);
-        this.productForm.get('rate').setValue(this.product.rate);
+        // this.productForm.get('rate').setValue(this.product.rate);
         this.productForm.get('description').setValue(this.product.description);
         this.productForm.get('status').setValue(this.product.status);
         this.productForm.get('image').setValue(this.product.images);
@@ -217,9 +261,9 @@ export class AddProductComponent implements OnInit {
   get discount() {
     return this.productForm.get('discount');
   }
-  get rate() {
-    return this.productForm.get('rate');
-  }
+  // get rate() {
+  //   return this.productForm.get('rate');
+  // }
   get description() {
     return this.productForm.get('description');
   }

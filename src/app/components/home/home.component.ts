@@ -19,7 +19,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   options: any;
   users: any;
   orders: any;
-  totalSales: number = 0;
+  totalSales: number = 0.0;
   ordersByMonth!: any[];
   constructor(
     private productServ: ProductService,
@@ -105,9 +105,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
       next: (data) => {
         this.orders = data;
         console.log(data);
-        this.orders.forEach((element: any) => {
-          this.totalSales += Number(element.total_price);
-        });
+        this.totalSales = this.orders.reduce((sum: number, element: any) => {
+          return sum + Number(element.total_price);
+        }, 0);
         // Initialize variables to store monthly orders
         let ordersInMonth1 = 0;
         let ordersInMonth2 = 0;

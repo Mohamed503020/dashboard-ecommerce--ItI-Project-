@@ -2,7 +2,7 @@
   <div class="container py-2 px-3 h-100">
     <div class="d-flex justify-content-between align-items-center py-3">
       <h1>{{title}}</h1>
-      <button class="btn" type="submit">View All Product</button>
+      <button class="btn" type="submit" [routerLink]="'/dashboard/products'">View All Product</button>
     </div>
   </div>
   <div class="container py-2 h-100">
@@ -23,7 +23,7 @@
 
                           <!-- *************************new*********************************** -->
                           <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
-                            (dragleave)="onDragLeave($event)" (click)="fileInput.click()">
+                            (dragleave)="onDragLeave($event)" (click)="fileInput.click()"type="file" formControlName="image" (change)="onFileChange($event)" multiple>
                             <p>Drag and drop images here or click to select files</p>
                             <input #fileInput type="file" hidden (change)="onFileSelected($event)"
                               (change)="onFileChange($event)" multiple formControlName="image">
@@ -39,6 +39,26 @@
                               </ng-container>
                             </div>
                           </div>
+
+
+
+                          <!-- <div class="dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (click)="fileInput.click()" type="file" formControlName="image" (change)="onFileChange($event)" multiple>
+                            <p>Drag and drop images here or click to select files</p>
+                            <input #fileInput type="file" hidden (change)="onFileSelected($event)" (change)="onFileChange($event)" multiple formControlName="image">
+                          </div>
+                          
+                          <div class="image-container" *ngIf="imageUrls && imageUrls.length > 0">
+                            <div class="uploaded-image-wrapper">
+                              <div class="delete-image" (click)="deleteImage(0)">x</div>
+                              <img class="uploaded-image uploaded-main-image" [src]="imageUrls[0]" alt="Uploaded Image">
+                            </div>
+                            <ng-container *ngFor="let imageUrl of imageUrls.slice(1)">
+                              <div class="uploaded-image-wrapper">
+                                <div class="delete-image" (click)="deleteImage(imageUrls.indexOf(imageUrl))">x</div>
+                                <img class="uploaded-image uploaded-thumbnail" [src]="imageUrl" alt="Uploaded Thumbnail">
+                              </div>
+                            </ng-container>
+                          </div> -->
                           <!-- *************************new*********************************** -->
 
                         </div>
@@ -127,7 +147,7 @@
                                 role="alert">
                                 <p *ngIf="name?.errors?.['required']">Name is Required <i
                                     class="fa-solid error fa-circle-exclamation"></i></p>
-                                <p *ngIf="name?.errors?.['pattern']">Invalid Product Name must be between 3 and 15
+                                <p *ngIf="name?.errors?.['pattern']">Invalid Product Name must be between 3 and 25
                                   characters
                                   <i class="fa-solid error fa-circle-exclamation"></i>
                                 </p>
@@ -207,7 +227,7 @@
                             </div>
                           </div>
                           <!-- ///////////////////rate//////////////////////////////// -->
-                          <div class="col-md-6">
+                          <!-- <div class="col-md-6">
                             <div class="inputbox mt-3 mr-2">
                               <input formControlName="rate" type="number" class="form-control" />
                               <span>Product Rate</span>
@@ -220,7 +240,7 @@
                                 </p>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- /////////////////DESCRIPTION////////////////////// -->
                           <div class="col-md-12">
                             <div class="inputbox mt-3 mr-2">
@@ -232,7 +252,7 @@
                                 <p *ngIf="description?.errors?.['required']">Product Description is Required <i
                                     class="fa-solid error fa-circle-exclamation"></i></p>
                                 <p *ngIf="description?.errors?.['pattern']">Invalid Product Description must be between
-                                  5 and 100 digits
+                                  5 and 400 digits
                                   <i class="fa-solid error fa-circle-exclamation"></i>
                                 </p>
                               </div>
