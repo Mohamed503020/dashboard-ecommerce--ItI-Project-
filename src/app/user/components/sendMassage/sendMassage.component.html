@@ -1,0 +1,50 @@
+<button mat-icon-button style="float: right; margin: 5px" matDialogClose>
+  <mat-icon>close</mat-icon>
+</button>
+<mat-dialog-content>
+  <header>
+    <h1>Send Massage</h1>
+  </header>
+</mat-dialog-content>
+
+<div class="container">
+  <form #myForm="ngForm">
+    <div class="mb-3">
+      <label class="form-label">User Email</label>
+      <input
+        type="text"
+        [(ngModel)]="email"
+        name="email"
+        ngModel
+        required
+        class="form-control"
+        id="categoryName"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Massage</label>
+      <textarea
+        [(ngModel)]="massage"
+        name="massage"
+        ngModel
+        required
+        class="form-control"
+        id="categoryName"
+      ></textarea>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+      <button class="btn btn-danger" type="button" matDialogClose>
+        Cancle
+      </button>
+      <button
+        class="btn save me-md-2"
+        type="submit"
+        (click)="replayMassageUser()"
+        matDialogClose
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

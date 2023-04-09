@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MessagesComponent } from './components/messages/messages.component';
+import { SendMassageComponent } from './components/sendMassage/sendMassage.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MessagesComponent } from './components/messages/messages.component';
     AddUserComponent,
     UsergridComponent,
     MessagesComponent,
+    SendMassageComponent
     
   ],
   imports: [

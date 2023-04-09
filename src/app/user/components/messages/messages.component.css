@@ -49,3 +49,9 @@ img {
   overflow: hidden;
   /* text */
 }
+/* new message */
+.newMessage{
+  background-color: #4b7e59bd !important;
+  padding: 2px;
+  margin: 1px;
+}

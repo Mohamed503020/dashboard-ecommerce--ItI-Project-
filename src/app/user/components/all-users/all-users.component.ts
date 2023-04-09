@@ -223,8 +223,8 @@ export class AllUsersComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.error(err);
-        Swal.fire('Oops...', 'Something went wrong!', 'error');
+        // console.error(err);
+        // Swal.fire('Oops...', 'Something went wrong!', 'error');
       },
     });
   }

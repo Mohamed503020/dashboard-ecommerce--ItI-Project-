@@ -45,6 +45,7 @@ export class AllCategoriesComponent implements OnInit {
     this.categoryServ.getCategories().subscribe({
       next:(res)=>{
         this.items=res;
+        this.filteredItems=this.items
         // console.log(this.items);
       }
      })
@@ -52,8 +53,9 @@ export class AllCategoriesComponent implements OnInit {
 
   calculatePageNumbers() {
     const totalPages = Math.ceil(this.filteredItems.length / this.pageSize);
-    this.pageNumbers = Array(totalPages).fill(0).map((_, i) => i + 1);
-    
+    this.pageNumbers = Array(totalPages)
+      .fill(0)
+      .map((_, i) => i + 1);
   }
 
   goToPage(pageNumber: number) {
@@ -75,19 +77,27 @@ export class AllCategoriesComponent implements OnInit {
   }
 
   search() {
-    this.filteredItems = this.items.filter(item => {
+    this.filteredItems = this.items.filter((item) => {
       const searchTermLower = this.searchTerm.toLowerCase();
-      
-        // if (this.searchType=='img'){
-        //   return item.img.toLowerCase().includes(searchTermLower)
-        // }
-        return this.searchType === 'name' ?
-        item.name.toLowerCase().includes(searchTermLower):'';
+
+      if (this.searchType == 'name') {
+        return item.name.toLowerCase().includes(searchTermLower);
+      }
+      // if (this.searchType == 'Email') {
+      //   return item.email.toLowerCase().includes(searchTermLower);
+      // }
+
+      return false;
+
+      // return this.searchType === 'created_at'?
+      // item.created_at.toLowerCase().includes(searchTermLower):
+      // item.updated_at.toLowerCase().includes(searchTermLower);
     });
+
     this.currentPage = 1;
     this.calculatePageNumbers();
     this.goToPage(1);
-  } 
+  }
 
  
   openDialog() {

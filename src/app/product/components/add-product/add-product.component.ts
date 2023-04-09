@@ -55,7 +55,7 @@ export class AddProductComponent implements OnInit {
       // rate: ['',[Validators.required, Validators.pattern("^[0-5]{1}$")]],
       // description: ['', [Validators.required,Validators.pattern("^(?=.{1,400}$)[a-zA-Z]+(\\s[a-zA-Z]+)*$")]],
       description: ['', [Validators.required]],
-      status: ['', Validators.required],
+      // status: ['', Validators.required],
       image: [[], Validators.required],
     });
 
@@ -185,7 +185,7 @@ export class AddProductComponent implements OnInit {
     formData.append('discount', this.productForm.get('discount').value);
     // formData.append('rate', this.productForm.get('rate').value);
     formData.append('description', this.productForm.get('description').value);
-    formData.append('status', this.productForm.get('status').value);
+    // formData.append('status', this.productForm.get('status').value);
     formData.append('image', this.productForm.get('images')?.value);
 
     if (this.productId) {
@@ -232,13 +232,13 @@ export class AddProductComponent implements OnInit {
         this.selectedCategory = res.category;
         this.productStates = res.status;
         this.productForm.get('name').setValue(this.product.name);
-        this.productForm.get('category_id').setValue(this.product.category);
+        this.productForm.get('category_id').setValue(this.product.category_id);
         this.productForm.get('price').setValue(this.product.price);
         this.productForm.get('quantity').setValue(this.product.quantity);
         this.productForm.get('discount').setValue(this.product.discount);
         // this.productForm.get('rate').setValue(this.product.rate);
         this.productForm.get('description').setValue(this.product.description);
-        this.productForm.get('status').setValue(this.product.status);
+        // this.productForm.get('status').setValue(this.product.status);
         this.productForm.get('image').setValue(this.product.images);
       },
       error: (error) => {
@@ -267,9 +267,9 @@ export class AddProductComponent implements OnInit {
   get description() {
     return this.productForm.get('description');
   }
-  get status() {
-    return this.productForm.get('status');
-  }
+  // get status() {
+  //   return this.productForm.get('status');
+  // }
   get image() {
     return this.productForm.get('image');
   }

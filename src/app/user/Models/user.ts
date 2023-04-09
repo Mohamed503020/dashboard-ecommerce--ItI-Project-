@@ -5,6 +5,7 @@ export interface User {
         imgName?:string,
         gender: string,
         id: number,
+        user_id:any,
         // updated_at:string,
         // created_at:string,
 }
